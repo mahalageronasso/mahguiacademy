@@ -202,8 +202,8 @@ export default function Plans() {
                       </ul>
 
                       {/* CTA */}
-                      <button
-                        onClick={() => toast(t("misc.comingSoon"))}
+                      <a
+                        href="https://mahguiacademy.gumroad.com/l/dgqyv" target="_blank" rel="noopener noreferrer"
                         className={`w-full py-3 rounded-lg text-sm font-semibold transition-all ${
                           isHighlighted
                             ? "text-white hover:opacity-90"
@@ -216,7 +216,7 @@ export default function Plans() {
                         }
                       >
                         {t("plans.cta")}
-                      </button>
+                      </a>
                     </div>
                   </motion.div>
                 );
