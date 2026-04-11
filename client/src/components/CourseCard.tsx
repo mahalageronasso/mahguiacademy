@@ -7,7 +7,6 @@
  */
 import { useLanguage } from "@/contexts/LanguageContext";
 import type { Course } from "@/lib/courses";
-import { toast } from "sonner";
 
 interface CourseCardProps {
   course: Course;
@@ -18,7 +17,6 @@ export default function CourseCard({ course }: CourseCardProps) {
 
   const isM = course.instructor === "mahala";
   const accentColor = isM ? "#D4537E" : "#1D9E75";
-  const lightBg = isM ? "#FDF2F6" : "#E8F5F0";
   const instructorName = isM ? "Mahala" : "Guilherme";
 
   return (
@@ -31,9 +29,7 @@ export default function CourseCard({ course }: CourseCardProps) {
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
           loading="lazy"
         />
-        {/* Gradient overlay at bottom for readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-        {/* Instructor badge on image */}
         <span
           className="absolute top-3 right-3 text-[10px] font-semibold px-2.5 py-1 rounded-full text-white backdrop-blur-sm"
           style={{ backgroundColor: accentColor + "CC" }}
@@ -44,7 +40,6 @@ export default function CourseCard({ course }: CourseCardProps) {
 
       {/* Content */}
       <div className="p-4 space-y-3">
-        {/* Category badge */}
         <span
           className="text-[11px] font-semibold uppercase tracking-wider"
           style={{ color: accentColor }}
@@ -52,12 +47,10 @@ export default function CourseCard({ course }: CourseCardProps) {
           {t(course.categoryKey)}
         </span>
 
-        {/* Course name */}
         <h3 className="font-heading text-base font-semibold text-foreground leading-snug line-clamp-2 min-h-[2.5rem]">
           {t(course.nameKey)}
         </h3>
 
-        {/* Meta */}
         <p className="text-xs text-muted-foreground">
           {course.lessons} {t("courses.lessons")} &middot; {course.hours}h
         </p>
@@ -77,8 +70,10 @@ export default function CourseCard({ course }: CourseCardProps) {
               {t("courses.orInBrl")} {course.priceBrl}
             </span>
           </div>
-          <button
-            onClick={() => toast(t("misc.comingSoon"))}
+          
+            href="https://mahguiacademy.gumroad.com/l/dgqyv"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-xs font-semibold px-3.5 py-1.5 rounded-md border transition-all hover:opacity-80"
             style={{
               borderColor: accentColor,
@@ -86,7 +81,7 @@ export default function CourseCard({ course }: CourseCardProps) {
             }}
           >
             {t("courses.enroll")}
-          </button>
+          </a>
         </div>
       </div>
     </div>
