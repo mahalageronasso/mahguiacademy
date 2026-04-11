@@ -55,14 +55,14 @@ const translations: Record<Lang, Record<string, string>> = {
     // Course names
     "course.hotelAccounting": "Hotel Accounting from Scratch",
     "course.revenueMgmt": "Fundamentals of Revenue Management",
-    "course.financialStatements": "Financial Statement Analysis",
+    "course.financialStatements": "Hospitality Financial & Managerial Accounting",
     "course.excelHospitality": "Excel for Hospitality Professionals",
     "course.strategicPricing": "Strategic Pricing for Hotels",
     "course.leadership": "Leadership in Hospitality",
-    "course.introHospitality": "Intro to Hospitality Management",
+    "course.introHospitality": "Introduction to Hospitality Management",
     "course.internationalCareer": "Build Your International Career",
-    "course.fleetMgmt": "Fleet Management in the UAE",
-    "course.uaeRealEstate": "Investing in UAE Real Estate",
+    "course.fleetMgmt": "Fleet Management",
+    "course.uaeRealEstate": "UAE Real Estate",
 
     // Course descriptions
     "course.hotelAccounting.desc": "Master the fundamentals of hotel accounting, from chart of accounts to financial reporting in the hospitality industry.",
