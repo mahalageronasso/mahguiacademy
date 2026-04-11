@@ -223,7 +223,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "course.leadership": "Liderança em Hospitalidade",
     "course.introHospitality": "Introdução à Gestão Hoteleira",
     "course.internationalCareer": "Construa Sua Carreira Internacional",
-    "course.fleetMgmt": "Gestão de Frotas nos Emirados",
+    "course.fleetMgmt": "Gestão de Frotas",
     "course.uaeRealEstate": "Investindo em Imóveis nos Emirados",
 
     // Course descriptions
@@ -235,7 +235,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "course.leadership.desc": "Cultive habilidades de liderança adaptadas aos desafios únicos da indústria da hospitalidade.",
     "course.introHospitality.desc": "Uma visão abrangente dos princípios de gestão hoteleira, operações e caminhos de carreira.",
     "course.internationalCareer.desc": "Navegue processos de visto, adaptação cultural e planejamento de carreira para uma carreira global em hospitalidade.",
-    "course.fleetMgmt.desc": "Gerencie frotas de veículos eficientemente no mercado dos Emirados, cobrindo operações de aluguel e logística.",
+    "course.fleetMgmt.desc": "Gerencie frotas de veículos eficientemente, cobrindo operações de aluguel e logística.",
     "course.uaeRealEstate.desc": "Entenda o mercado imobiliário dos Emirados, estratégias de investimento, regulamentações e análise de ROI.",
 
     // Plans
@@ -253,15 +253,15 @@ const translations: Record<Lang, Record<string, string>> = {
     "plans.monthly.brl": "ou R$ 247/mês",
     "plans.annual": "Acesso Anual",
     "plans.annual.desc": "Melhor custo-benefício — acesso total a todos os cursos e conteúdo exclusivo por um ano inteiro.",
-    "plans.annual.price": "US$ 155",
+    "plans.annual.price": "US$ 197",
     "plans.annual.per": "/ano",
     "plans.annual.badge": "Melhor valor",
-    "plans.annual.brl": "ou R$ 797/ano",
+    "plans.annual.brl": "ou R$ 997/ano",
     "plans.mentorship": "Mentoria Premium",
     "plans.mentorship.desc": "Sessões de mentoria 1-a-1 com nossos instrutores, orientação personalizada de carreira e suporte prioritário.",
     "plans.mentorship.price": "US$ 997",
     "plans.mentorship.per": "único",
-    "plans.mentorship.brl": "ou R$ 5.300",
+    "plans.mentorship.brl": "ou R$ 5.000",
     "plans.feature.lifetime": "Acesso vitalício ao curso",
     "plans.feature.materials": "Todos os materiais do curso",
     "plans.feature.certificate": "Certificado de conclusão",
