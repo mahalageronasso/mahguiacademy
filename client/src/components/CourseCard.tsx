@@ -32,11 +32,8 @@ export default function CourseCard({ course }: CourseCardProps) {
         </p>
         <div className="flex items-center justify-between pt-1">
           <div>
-            <div className="flex items-baseline gap-2">
-              <span className="text-xs text-muted-foreground line-through">US$ {course.originalPriceUsd}</span>
-              <span className="text-base font-semibold text-foreground">US$ {course.priceUsd}</span>
-            </div>
-            <span className="text-[10px] text-muted-foreground">{t("courses.orInBrl")} {course.priceBrl}</span>
+            <span className="text-base font-semibold text-foreground">US$ {course.priceUsd}</span>
+            <p className="text-[10px] text-muted-foreground">{t("courses.orInBrl")} {course.priceBrl}</p>
           </div>
           <a href="https://mahguiacademy.gumroad.com/l/dgqyv" target="_blank" rel="noopener noreferrer" className="text-xs font-semibold px-3.5 py-1.5 rounded-md border transition-all hover:opacity-80" style={{ borderColor: accentColor, color: accentColor }}>
             {t("courses.enroll")}
