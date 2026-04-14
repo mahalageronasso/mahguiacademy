@@ -53,6 +53,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "courses.orInBrl": "or R$",
 
     // Course names
+    "course.resumeWorkshop": "Land Your Dream Hospitality Job Abroad: International Resume Workshop",
     "course.hotelAccounting": "Hotel Accounting from Scratch",
     "course.revenueMgmt": "Fundamentals of Revenue Management",
     "course.financialStatements": "Hospitality Financial & Managerial Accounting",
@@ -215,6 +216,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "courses.orInBrl": "ou R$",
 
     // Course names
+    "course.resumeWorkshop": "Conquiste seu Emprego Internacional em Hotelaria: Workshop de Currículo",
     "course.hotelAccounting": "Contabilidade Hoteleira do Zero",
     "course.revenueMgmt": "Fundamentos de Revenue Management",
     "course.financialStatements": "Análise de Demonstrações Financeiras",
