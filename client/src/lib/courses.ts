@@ -15,6 +15,21 @@ export interface Course {
 }
 
 export const courses: Course[] = [
+   {
+    id: "resume-workshop",
+    nameKey: "course.resumeWorkshop",
+    descKey: "course.resumeWorkshop.desc",
+    category: "career",
+    categoryKey: "courses.filter.career",
+    instructor: "mahala",
+    lessons: 4,
+    hours: 1,
+    priceUsd: 27,
+    priceBrl: 147,
+    icon: "CV",
+    image: "https://d2xsxph8kpxj0f.cloudfront.net/310419663029168482/M83iGP6sVHFT6vazqWgrVe/course-international-career-NGsnsyCGWKryZkmWEkw4BL.webp",
+    gumroadUrl: "https://mahguiacademy.gumroad.com/l/international-resume-workshop",
+  },
   {
     id: "hotel-accounting",
     nameKey: "course.hotelAccounting",
