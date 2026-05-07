@@ -91,7 +91,12 @@ export default function Consulting() {
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = () => {
-    if (formData.name && formData.email) setSubmitted(true);
+    if (formData.name && formData.email) {
+      const message = `Hi Mahala! 👋 I am interested in MahGui Consulting.\n\n*Name:* ${formData.name}\n*Email:* ${formData.email}\n*Concept:* ${formData.concept || "Not specified"}\n*Message:* ${formData.message || "Not specified"}`;
+      const encoded = encodeURIComponent(message);
+      window.open(`https://wa.me/971521735949?text=${encoded}`, "_blank");
+      setSubmitted(true);
+    }
   };
 
   return (
