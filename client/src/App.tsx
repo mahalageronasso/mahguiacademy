@@ -10,6 +10,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import Courses from "./pages/Courses";
 import Plans from "./pages/Plans";
 import Instructors from "./pages/Instructors";
+import Consulting from "./pages/Consulting";
 
 function Router() {
   return (
@@ -18,6 +19,7 @@ function Router() {
       <Route path="/courses" component={Courses} />
       <Route path="/plans" component={Plans} />
       <Route path="/professors" component={Instructors} />
+      <Route path="/consulting" component={Consulting} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>
