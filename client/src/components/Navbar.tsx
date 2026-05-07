@@ -21,6 +21,7 @@ export default function Navbar() {
     { href: "/courses", label: t("nav.courses") },
     { href: "/plans", label: t("nav.plans") },
     { href: "/professors", label: t("nav.professors") },
+    { href: "/consulting", label: "Consulting" },
   ];
 
   return (
