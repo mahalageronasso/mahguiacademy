@@ -323,6 +323,78 @@ export default function Home() {
           </div>
         </section>
 
+
+        {/* ===== MENTORSHIP ===== */}
+        <section className="py-20 lg:py-24" style={{ background: "#faf7f3" }}>
+          <div className="container">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+              {/* Left: copy */}
+              <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
+                <span className="inline-block text-[11px] font-bold uppercase tracking-[0.2em] mb-5 px-3 py-1 rounded-full border" style={{ color: "#D4537E", borderColor: "#D4537E40", background: "#D4537E10" }}>
+                  {lang === "pt" ? "Mentoria Individual · Hospitality Without Borders" : "Individual Mentorship · Hospitality Without Borders"}
+                </span>
+                <h2 className="font-heading text-3xl lg:text-4xl font-bold leading-tight mb-5" style={{ color: "#1a1a1a" }}>
+                  {lang === "pt"
+                    ? <span>O método que leva você<br />para <em style={{ fontStyle: "italic", color: "#D4537E" }}>onde quer chegar.</em></span>
+                    : <span>The method that takes you<br />to <em style={{ fontStyle: "italic", color: "#D4537E" }}>where you want to be.</em></span>
+                  }
+                </h2>
+                <p className="text-base leading-relaxed mb-6 text-muted-foreground" style={{ maxWidth: 480 }}>
+                  {lang === "pt"
+                    ? "6 meses de acompanhamento individual com a Dra. Mahala, baseado no Método PASSPORT — um framework proprietário de 8 etapas para transição de carreira internacional na hospitalidade."
+                    : "6 months of individual support with Dr. Mahala, based on the PASSPORT Method — a proprietary 8-step framework for international hospitality career transitions."
+                  }
+                </p>
+                <div className="space-y-3 mb-8">
+                  {[
+                    lang === "pt" ? "Estratégia de carreira 1:1 personalizada" : "Personalized 1:1 career strategy",
+                    lang === "pt" ? "Currículo internacional no formato ATS" : "ATS-ready international resume rebuild",
+                    lang === "pt" ? "LinkedIn + prep para entrevistas" : "LinkedIn optimization + interview prep",
+                    lang === "pt" ? "Acesso total à MahGui Academy" : "Full MahGui Academy access included",
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center gap-2.5 text-sm" style={{ color: "#4a443d" }}>
+                      <div className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "#D4537E18" }}>
+                        <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1.5 4L3.5 6L6.5 2" stroke="#D4537E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                      </div>
+                      {item}
+                    </div>
+                  ))}
+                </div>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <a href="https://tally.so/r/QK24jA" target="_blank" rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-md text-sm font-semibold text-white transition-all hover:opacity-90"
+                    style={{ backgroundColor: "#1a1a1a" }}>
+                    {lang === "pt" ? "Aplicar agora" : "Apply now"} <ArrowRight size={14} />
+                  </a>
+                  <Link href="/plans"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-md text-sm font-medium border transition-all hover:bg-muted"
+                    style={{ borderColor: "#e0d8d0" }}>
+                    {lang === "pt" ? "Saber mais" : "Learn more"}
+                  </Link>
+                </div>
+              </motion.div>
+
+              {/* Right: PASSPORT steps */}
+              <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}>
+                <div className="grid grid-cols-2 gap-3">
+                  {(lang === "pt"
+                    ? ["P — Profile","A — Assets","S — Story","S — Strategy","P — Positioning","O — Outreach","R — Results","T — Transition"]
+                    : ["P — Profile","A — Assets","S — Story","S — Strategy","P — Positioning","O — Outreach","R — Results","T — Transition"]
+                  ).map((step, i) => (
+                    <motion.div key={i} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}
+                      className="rounded-xl p-4 border" style={{ background: "white", borderColor: "#e8e2da" }}>
+                      <div className="font-heading text-xl font-bold mb-1" style={{ color: "#D4537E" }}>{step[0]}</div>
+                      <div className="text-xs text-muted-foreground leading-relaxed">{step.slice(4)}</div>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+
+            </div>
+          </div>
+        </section>
+
         {/* ===== STATS ===== */}
         <section className="py-12 border-b" style={{ borderColor: "#ede8e0" }}>
           <div className="container">
