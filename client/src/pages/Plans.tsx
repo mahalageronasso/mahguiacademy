@@ -216,6 +216,29 @@ export default function Plans() {
             </div>
 
             {/* CTA card */}
+
+            {/* Ertunc testimonial */}
+            <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              className="max-w-3xl mx-auto mb-8 rounded-2xl p-8"
+              style={{ background: "rgba(255,255,255,0.04)", border: `1px solid ${ROSE}40`, borderLeft: `4px solid ${ROSE}` }}>
+              <div style={{ fontFamily: "Georgia,serif", fontSize: 36, color: ROSE, lineHeight: 1, marginBottom: 12 }}>"</div>
+              <p style={{ fontFamily: "sans-serif", fontSize: 16, color: "rgba(255,255,255,0.82)", fontStyle: "italic", lineHeight: 1.75, marginBottom: 20 }}>
+                {lang === "pt"
+                  ? "Em uma semana consegui duas entrevistas — Fairmont Ramla Riyadh e Angsana Corfu Resort. A Mahala reconstruiu meu currículo, trouxe à tona números que eu havia esquecido que tinha, e me preparou para a entrevista com o GM com uma pesquisa que eu jamais teria feito sozinho. Acho que te devo umas férias."
+                  : "In one week I got two interviews — Fairmont Ramla Riyadh and Angsana Corfu Resort. Mahala rebuilt my resume, surfaced numbers I had forgotten I owned, and prepped me for the GM interview with research I never would have done alone. I think I owe her a vacation."
+                }
+              </p>
+              <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+                <div style={{ width: 42, height: 42, borderRadius: "50%", background: ROSE, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "sans-serif", fontWeight: 600, fontSize: 14, color: "#fff", flexShrink: 0 }}>EB</div>
+                <div>
+                  <div style={{ fontFamily: "sans-serif", fontSize: 14, fontWeight: 600, color: "#fff" }}>Ertunc Barlas</div>
+                  <div style={{ fontFamily: "sans-serif", fontSize: 12, color: "rgba(255,255,255,0.45)" }}>
+                    {lang === "pt" ? "Diretor de F&B · 25 anos · Four Seasons, Six Senses, Rixos · UAE" : "F&B Director · 25 years · Four Seasons, Six Senses, Rixos · UAE"}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
               className="max-w-3xl mx-auto rounded-2xl p-8 lg:p-12 text-center"
               style={{ background: `linear-gradient(135deg, ${NAVY}dd, ${INK})`, border: `1px solid ${ROSE}40` }}>
