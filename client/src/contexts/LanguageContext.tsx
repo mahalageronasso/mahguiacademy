@@ -10,14 +10,11 @@ interface LanguageContextType {
 
 const translations: Record<Lang, Record<string, string>> = {
   en: {
-    // Nav
     "nav.courses": "Courses",
     "nav.plans": "Plans",
     "nav.professors": "Professors",
     "nav.getStarted": "Get started",
     "nav.tagline": "Hospitality Without Borders",
-
-    // Hero
     "hero.title.1": "Learn from those who ",
     "hero.title.lived": "lived",
     "hero.title.2": " hospitality across ",
@@ -25,15 +22,11 @@ const translations: Record<Lang, Record<string, string>> = {
     "hero.subtitle": "Practical courses in finance, revenue management, leadership, international careers, real estate and more — for hospitality professionals ready to go further.",
     "hero.cta.plans": "View subscription plans",
     "hero.cta.courses": "Explore courses",
-
-    // Stats
     "stats.courses": "courses available",
     "stats.phd": "UCF — hospitality",
     "stats.years": "years in industry",
     "stats.continents": "continents",
     "stats.professors": "professors",
-
-    // Courses section
     "courses.title": "Courses",
     "courses.viewAll": "View all",
     "courses.filter.all": "All",
@@ -51,33 +44,28 @@ const translations: Record<Lang, Record<string, string>> = {
     "courses.from": "From",
     "courses.noCourses": "No courses found in this category.",
     "courses.orInBrl": "or R$",
-
-    // Course names
     "course.resumeWorkshop": "Land Your Dream Hospitality Job Abroad: International Resume Workshop",
+    "course.resumeWorkshop.desc": "Build an ATS-ready international resume that gets you noticed by global hotel recruiters — with templates, action verb guides, and a step-by-step framework.",
     "course.hotelAccounting": "Hotel Accounting from Scratch",
-    "course.revenueMgmt": "Fundamentals of Revenue Management",
-    "course.financialStatements": "Hospitality Financial & Managerial Accounting",
-    "course.excelHospitality": "Excel for Hospitality Professionals",
-    "course.strategicPricing": "Strategic Pricing for Hotels",
-    "course.leadership": "Leadership in Hospitality",
-    "course.introHospitality": "Introduction to Hospitality Management",
-    "course.internationalCareer": "Build Your International Career",
-    "course.fleetMgmt": "Fleet Management",
-    "course.uaeRealEstate": "UAE Real Estate",
-
-    // Course descriptions
     "course.hotelAccounting.desc": "Master the fundamentals of hotel accounting, from chart of accounts to financial reporting in the hospitality industry.",
+    "course.revenueMgmt": "Fundamentals of Revenue Management",
     "course.revenueMgmt.desc": "Learn demand forecasting, pricing strategies, and distribution channel management for maximum hotel revenue.",
+    "course.financialStatements": "Hospitality Financial & Managerial Accounting",
     "course.financialStatements.desc": "Analyze income statements, balance sheets, and cash flow reports specific to the hospitality sector.",
+    "course.excelHospitality": "Excel for Hospitality Professionals",
     "course.excelHospitality.desc": "Build powerful spreadsheets for budgeting, forecasting, and operational analysis in hotels.",
+    "course.strategicPricing": "Strategic Pricing for Hotels",
     "course.strategicPricing.desc": "Develop data-driven pricing strategies that maximize revenue per available room.",
+    "course.leadership": "Leadership in Hospitality",
     "course.leadership.desc": "Cultivate leadership skills tailored for the unique challenges of the hospitality industry.",
+    "course.introHospitality": "Introduction to Hospitality Management",
     "course.introHospitality.desc": "A comprehensive overview of hospitality management principles, operations, and career paths.",
+    "course.internationalCareer": "Build Your International Career",
     "course.internationalCareer.desc": "Navigate visa processes, cultural adaptation, and career planning for a global hospitality career.",
+    "course.fleetMgmt": "Fleet Management",
     "course.fleetMgmt.desc": "Manage vehicle fleets efficiently in the UAE market, covering car rental operations and logistics.",
+    "course.uaeRealEstate": "UAE Real Estate",
     "course.uaeRealEstate.desc": "Understand UAE property markets, investment strategies, regulations, and ROI analysis for real estate.",
-
-    // Plans
     "plans.title": "Choose Your Plan",
     "plans.subtitle": "Invest in your career with flexible options that fit your goals and budget.",
     "plans.individual": "Individual Course",
@@ -117,8 +105,6 @@ const translations: Record<Lang, Record<string, string>> = {
     "plans.popular": "Most popular",
     "plans.save": "Save 32%",
     "plans.brlNote": "Brazilian residents can pay in BRL",
-
-    // Instructors
     "professors.title": "Meet Your Professors",
     "professors.subtitle": "Learn from professionals who built their careers across continents, combining academic excellence with real-world experience.",
     "professors.mahala.name": "Dr. Mahala Geronasso",
@@ -133,32 +119,26 @@ const translations: Record<Lang, Record<string, string>> = {
     "professors.mahala.expertise.3": "Data Analytics & Visualization",
     "professors.mahala.expertise.4": "Leadership & Career Development",
     "professors.guilherme.name": "Guilherme Gomes",
-    "professors.guilherme.role": "Real Estate & Operations Specialist — Abu Dhabi, UAE",
-    "professors.guilherme.bio": "Guilherme Gomes is a certified Real Estate Broker (ThinkProp / Abu Dhabi Real Estate Centre) and operations leader with 8+ years of experience in client-facing roles, high-value negotiations, and multi-location business expansion. As former Head of Operations at AZ Car Rental, he scaled the company from a single location into a multi-branch operation across Orlando, Miami, Fort Lauderdale, and Tampa — managing 45+ fleet units, negotiating a subleasing agreement with Mercedes-Benz, and building partnerships with over 10 travel and hospitality brands including Booking Group and CVC. With a Law degree from LaSalle University (Rio de Janeiro) and certifications in Six Sigma, Supply Chain, Data Analytics, and Strategic Thinking, Guilherme combines legal acumen with operational excellence. Trilingual in Portuguese, English, and Spanish, he now brings his expertise to the UAE market, helping professionals navigate real estate investment, fleet management, and business opportunities in the Gulf region.",
-    "professors.guilherme.credential.1": "Certified RE Broker — UAE",
+    "professors.guilherme.role": "Operations & Business Development — Abu Dhabi, UAE",
+    "professors.guilherme.bio": "Guilherme Gomes is an operations and business development leader with 8+ years of experience scaling multi-location businesses, leading high-performance teams, and driving operational excellence across the US and UAE markets. As former Head of Operations at AZ Car Rental, he grew the company from a single unit into a multi-branch operation across Orlando, Miami, Fort Lauderdale, and Tampa — managing 45+ fleet units, negotiating a subleasing agreement with Mercedes-Benz, and building partnerships with over 10 travel and hospitality brands including Booking Group and CVC. He is also co-founder of Tradimax, an insurance brokerage focused on expanding market reach and building commercial partnerships in Brazil. With a Law degree from LaSalle University (Rio de Janeiro) and certifications in Six Sigma, Supply Chain, Data Analytics, and Strategic Thinking, Guilherme brings a rare combination of legal acumen, analytical thinking, and hands-on operational expertise. Trilingual in Portuguese, English, and Spanish, he now teaches fleet management and business operations — helping professionals build the systems and partnerships that scale.",
+    "professors.guilherme.credential.1": "Operations Leader — US & UAE",
     "professors.guilherme.credential.2": "LL.B. — LaSalle University",
     "professors.guilherme.credential.3": "8+ years operations",
     "professors.guilherme.credential.4": "Trilingual: PT/EN/ES",
-    "professors.guilherme.expertise.1": "UAE Real Estate Investment",
+    "professors.guilherme.expertise.1": "Business Operations & Scaling",
     "professors.guilherme.expertise.2": "Fleet Management & Car Rental",
-    "professors.guilherme.expertise.3": "Business Operations & Partnerships",
+    "professors.guilherme.expertise.3": "Commercial Partnerships & Growth",
     "professors.guilherme.expertise.4": "Data Analytics & Strategic Thinking",
     "professors.expertise": "Areas of Expertise",
     "professors.courses": "Courses by",
-
-    // Footer
     "footer.desc": "Empowering hospitality, tourism, and business professionals with world-class education, practical skills, and international career guidance.",
     "footer.quickLinks": "Quick Links",
     "footer.contact": "Contact",
     "footer.rights": "All rights reserved.",
     "footer.email": "sdxinvestments@gmail.com",
-
-    // CTA section
     "cta.title": "Ready to advance your career?",
     "cta.subtitle": "Join hundreds of hospitality professionals who are transforming their careers with MahGui Academy.",
     "cta.button": "Start learning today",
-
-    // E-book
     "ebook.badge": "New Release",
     "ebook.title": "Financial Management for the Hospitality Industry",
     "ebook.authors": "By Dr. Mahala Geronasso & Dr. Murat Kizildag",
@@ -168,19 +148,14 @@ const translations: Record<Lang, Record<string, string>> = {
     "ebook.price": "US$ 59",
     "ebook.cta": "Get the E-book",
     "ebook.publisher": "Published by Kendall Hunt, 2025",
-
-    // Misc
     "misc.comingSoon": "Feature coming soon",
   },
   pt: {
-    // Nav
     "nav.courses": "Cursos",
     "nav.plans": "Planos",
     "nav.professors": "Professores",
     "nav.getStarted": "Comece agora",
     "nav.tagline": "Hospitalidade Sem Fronteiras",
-
-    // Hero
     "hero.title.1": "Aprenda com quem ",
     "hero.title.lived": "viveu",
     "hero.title.2": " a hospitalidade em ",
@@ -188,15 +163,11 @@ const translations: Record<Lang, Record<string, string>> = {
     "hero.subtitle": "Cursos práticos em finanças, revenue management, liderança, carreiras internacionais, imóveis e mais — para profissionais de hospitalidade prontos para ir além.",
     "hero.cta.plans": "Ver planos de assinatura",
     "hero.cta.courses": "Explorar cursos",
-
-    // Stats
     "stats.courses": "cursos disponíveis",
     "stats.phd": "UCF — hospitalidade",
     "stats.years": "anos na indústria",
     "stats.continents": "continentes",
     "stats.professors": "professores",
-
-    // Courses section
     "courses.title": "Cursos",
     "courses.viewAll": "Ver todos",
     "courses.filter.all": "Todos",
@@ -214,33 +185,28 @@ const translations: Record<Lang, Record<string, string>> = {
     "courses.from": "A partir de",
     "courses.noCourses": "Nenhum curso encontrado nesta categoria.",
     "courses.orInBrl": "ou R$",
-
-    // Course names
     "course.resumeWorkshop": "Conquiste seu Emprego Internacional em Hotelaria: Workshop de Currículo",
+    "course.resumeWorkshop.desc": "Monte um currículo internacional no formato ATS que chama atenção de recrutadores globais — com templates, guias de verbos de ação e framework passo a passo.",
     "course.hotelAccounting": "Contabilidade Hoteleira do Zero",
-    "course.revenueMgmt": "Fundamentos de Revenue Management",
-    "course.financialStatements": "Análise de Demonstrações Financeiras",
-    "course.excelHospitality": "Excel para Profissionais de Hospitalidade",
-    "course.strategicPricing": "Precificação Estratégica para Hotéis",
-    "course.leadership": "Liderança em Hospitalidade",
-    "course.introHospitality": "Introdução à Gestão Hoteleira",
-    "course.internationalCareer": "Construa Sua Carreira Internacional",
-    "course.fleetMgmt": "Gestão de Frotas",
-    "course.uaeRealEstate": "Investindo em Imóveis nos Emirados",
-
-    // Course descriptions
     "course.hotelAccounting.desc": "Domine os fundamentos da contabilidade hoteleira, do plano de contas aos relatórios financeiros na indústria da hospitalidade.",
+    "course.revenueMgmt": "Fundamentos de Revenue Management",
     "course.revenueMgmt.desc": "Aprenda previsão de demanda, estratégias de preços e gestão de canais de distribuição para maximizar a receita hoteleira.",
+    "course.financialStatements": "Análise de Demonstrações Financeiras",
     "course.financialStatements.desc": "Analise demonstrações de resultado, balanços patrimoniais e fluxos de caixa específicos do setor hoteleiro.",
+    "course.excelHospitality": "Excel para Profissionais de Hospitalidade",
     "course.excelHospitality.desc": "Crie planilhas poderosas para orçamento, previsão e análise operacional em hotéis.",
+    "course.strategicPricing": "Precificação Estratégica para Hotéis",
     "course.strategicPricing.desc": "Desenvolva estratégias de precificação baseadas em dados para maximizar a receita por quarto disponível.",
+    "course.leadership": "Liderança em Hospitalidade",
     "course.leadership.desc": "Cultive habilidades de liderança adaptadas aos desafios únicos da indústria da hospitalidade.",
+    "course.introHospitality": "Introdução à Gestão Hoteleira",
     "course.introHospitality.desc": "Uma visão abrangente dos princípios de gestão hoteleira, operações e caminhos de carreira.",
+    "course.internationalCareer": "Construa Sua Carreira Internacional",
     "course.internationalCareer.desc": "Navegue processos de visto, adaptação cultural e planejamento de carreira para uma carreira global em hospitalidade.",
+    "course.fleetMgmt": "Gestão de Frotas",
     "course.fleetMgmt.desc": "Gerencie frotas de veículos eficientemente, cobrindo operações de aluguel e logística.",
+    "course.uaeRealEstate": "Investindo em Imóveis nos Emirados",
     "course.uaeRealEstate.desc": "Entenda o mercado imobiliário dos Emirados, estratégias de investimento, regulamentações e análise de ROI.",
-
-    // Plans
     "plans.title": "Escolha Seu Plano",
     "plans.subtitle": "Invista na sua carreira com opções flexíveis que se adaptam aos seus objetivos e orçamento.",
     "plans.individual": "Curso Avulso",
@@ -260,7 +226,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "plans.annual.badge": "Melhor valor",
     "plans.annual.brl": "ou R$ 997/ano",
     "plans.mentorship": "Mentoria Premium",
-    "plans.mentorship.desc": "Sessões de mentoria 1-a-1 com nossos instrutores, orientação personalizada de carreira e suporte prioritário.",
+    "plans.mentorship.desc": "Sessões de mentoria 1-a-1 com a Dra. Mahala, orientação personalizada de carreira pelo Método PASSPORT e suporte durante toda a jornada.",
     "plans.mentorship.price": "US$ 997",
     "plans.mentorship.per": "único",
     "plans.mentorship.brl": "ou R$ 5.000",
@@ -280,8 +246,6 @@ const translations: Record<Lang, Record<string, string>> = {
     "plans.popular": "Mais popular",
     "plans.save": "Economize 32%",
     "plans.brlNote": "Residentes no Brasil podem pagar em reais",
-
-    // Instructors
     "professors.title": "Conheça Seus Professores",
     "professors.subtitle": "Aprenda com profissionais que construíram suas carreiras em vários continentes, combinando excelência acadêmica com experiência prática.",
     "professors.mahala.name": "Dra. Mahala Geronasso",
@@ -296,32 +260,26 @@ const translations: Record<Lang, Record<string, string>> = {
     "professors.mahala.expertise.3": "Análise de Dados & Visualização",
     "professors.mahala.expertise.4": "Liderança & Desenvolvimento de Carreira",
     "professors.guilherme.name": "Guilherme Gomes",
-    "professors.guilherme.role": "Especialista em Real Estate & Operações — Abu Dhabi, UAE",
-    "professors.guilherme.bio": "Guilherme Gomes é Corretor de Imóveis certificado (ThinkProp / Abu Dhabi Real Estate Centre) e líder operacional com mais de 8 anos de experiência em funções de atendimento ao cliente, negociações de alto valor e expansão de negócios multi-localidade. Como ex-Head de Operações da AZ Car Rental, escalou a empresa de uma única unidade para uma operação multi-filial em Orlando, Miami, Fort Lauderdale e Tampa — gerenciando mais de 45 veículos, negociando um contrato de subleasing com a Mercedes-Benz e construindo parcerias com mais de 10 marcas de turismo e hospitalidade, incluindo Booking Group e CVC. Com formação em Direito pela Universidade LaSalle (Rio de Janeiro) e certificações em Six Sigma, Supply Chain, Data Analytics e Strategic Thinking, Guilherme combina conhecimento jurídico com excelência operacional. Trilíngue em português, inglês e espanhol, ele agora traz sua expertise para o mercado dos Emirados, ajudando profissionais a navegar investimentos imobiliários, gestão de frotas e oportunidades de negócios na região do Golfo.",
-    "professors.guilherme.credential.1": "Corretor Certificado — UAE",
+    "professors.guilherme.role": "Operações & Desenvolvimento de Negócios — Abu Dhabi, UAE",
+    "professors.guilherme.bio": "Guilherme Gomes é um líder de operações e desenvolvimento de negócios com mais de 8 anos de experiência escalando empresas multi-localidade, liderando equipes de alta performance e construindo excelência operacional nos mercados dos EUA e Emirados. Como ex-Head de Operações da AZ Car Rental, cresceu a empresa de uma única unidade para uma operação multi-filial em Orlando, Miami, Fort Lauderdale e Tampa — gerenciando mais de 45 veículos, negociando contrato de subleasing com a Mercedes-Benz e construindo parcerias com mais de 10 marcas de turismo e hospitalidade, incluindo Booking Group e CVC. É também cofundador da Tradimax, corretora de seguros com foco em expansão comercial e construção de parcerias no Brasil. Com formação em Direito pela Universidade LaSalle (Rio de Janeiro) e certificações em Six Sigma, Supply Chain, Data Analytics e Strategic Thinking, Guilherme une raciocínio jurídico, pensamento analítico e experiência prática em operações. Trilíngue em português, inglês e espanhol, ele ensina gestão de frotas e operações de negócios — ajudando profissionais a construir os sistemas e parcerias que escalam.",
+    "professors.guilherme.credential.1": "Líder de Operações — EUA & UAE",
     "professors.guilherme.credential.2": "LL.B. — Univ. LaSalle",
     "professors.guilherme.credential.3": "8+ anos operações",
     "professors.guilherme.credential.4": "Trilíngue: PT/EN/ES",
-    "professors.guilherme.expertise.1": "Investimento Imobiliário nos Emirados",
+    "professors.guilherme.expertise.1": "Operações & Escalabilidade de Negócios",
     "professors.guilherme.expertise.2": "Gestão de Frotas & Aluguel de Veículos",
-    "professors.guilherme.expertise.3": "Operações & Parcerias de Negócios",
+    "professors.guilherme.expertise.3": "Parcerias Comerciais & Crescimento",
     "professors.guilherme.expertise.4": "Data Analytics & Pensamento Estratégico",
     "professors.expertise": "Áreas de Expertise",
     "professors.courses": "Cursos de",
-
-    // Footer
     "footer.desc": "Capacitando profissionais de hospitalidade, turismo e negócios com educação de classe mundial, habilidades práticas e orientação de carreira internacional.",
     "footer.quickLinks": "Links Rápidos",
     "footer.contact": "Contato",
     "footer.rights": "Todos os direitos reservados.",
     "footer.email": "sdxinvestments@gmail.com",
-
-    // CTA section
     "cta.title": "Pronto para avançar na sua carreira?",
     "cta.subtitle": "Junte-se a centenas de profissionais de hospitalidade que estão transformando suas carreiras com a MahGui Academy.",
     "cta.button": "Comece a aprender hoje",
-
-    // E-book
     "ebook.badge": "Lançamento",
     "ebook.title": "Financial Management for the Hospitality Industry",
     "ebook.authors": "Por Dra. Mahala Geronasso & Dr. Murat Kizildag",
@@ -331,8 +289,6 @@ const translations: Record<Lang, Record<string, string>> = {
     "ebook.price": "US$ 59",
     "ebook.cta": "Adquirir o E-book",
     "ebook.publisher": "Publicado por Kendall Hunt, 2025",
-
-    // Misc
     "misc.comingSoon": "Funcionalidade em breve",
   },
 };
