@@ -498,14 +498,14 @@ export default function Consulting() {
               Transparent rates.<br /><em style={{ fontStyle: "italic", color: ROSE }}>No surprises.</em>
             </h2>
             <p style={{ fontFamily: "sans-serif", fontSize: 16, color: "rgba(255,255,255,0.6)", marginBottom: 56 }}>
-              All engagements include a free 30-minute discovery call before any commitment.
+              All projects are scoped individually after a free 30-minute discovery call. Pricing starts from $300 depending on scope and complexity.
             </p>
           </Reveal>
           <div className="c-pricing-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 20 }}>
             {[
-              { title: "Business Plan", price: "$800–$1,500", note: "per project · 5–7 days", featured: false, items: ["12-month ramp-up projection","3 financial scenarios","ROI & payback analysis","Bilingual (EN/PT)"], msg: "Hi Mahala! I'm interested in the Business Plan service. Can you tell me more?" },
-              { title: "Complete Package", price: "$1,000–$1,800", note: "per project · ~20% savings", featured: true, tag: "⭐ Best Value", items: ["Everything in Business Plan","Full P&L audit & benchmarks","Hidden cost identification","KPI dashboard recommendation","1 revision round included"], msg: "Hi Mahala! I'm interested in the Complete Package (Business Plan + P&L Review)." },
-              { title: "P&L Review", price: "$300–$500", note: "per project · 3–5 days", featured: false, items: ["COGS & labor benchmarking","Fixed cost mapping","Corrected projections","Written recommendations"], msg: "Hi Mahala! I'm interested in the P&L Review service." },
+              { title: "Business Plan", price: "From $800", note: "scoped per project · 5–7 days", featured: false, items: ["12-month ramp-up projection","3 financial scenarios","ROI & payback analysis","Bilingual (EN/PT)"], msg: "Hi Mahala! I'm interested in the Business Plan service. Can you tell me more?" },
+              { title: "Complete Package", price: "From $1,000", note: "scoped per project · best value", featured: true, tag: "⭐ Best Value", items: ["Everything in Business Plan","Full P&L audit & benchmarks","Hidden cost identification","KPI dashboard recommendation","1 revision round included"], msg: "Hi Mahala! I'm interested in the Complete Package (Business Plan + P&L Review)." },
+              { title: "P&L Review", price: "From $300", note: "scoped per project · 3–5 days", featured: false, items: ["COGS & labor benchmarking","Fixed cost mapping","Corrected projections","Written recommendations"], msg: "Hi Mahala! I'm interested in the P&L Review service." },
             ].map((card, i) => (
               <Reveal key={i} delay={i * 0.1}>
                 <div style={{ background: card.featured ? ROSE : "rgba(255,255,255,0.05)", border: `1px solid ${card.featured ? ROSE : "rgba(255,255,255,0.1)"}`, borderRadius: 16, padding: "36px 28px", position: "relative" }}>
