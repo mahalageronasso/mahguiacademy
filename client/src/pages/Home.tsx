@@ -67,7 +67,7 @@ export default function Home() {
       desc: lang === "pt"
         ? "Plano financeiro completo pronto para investidor — com projeções de 12 meses, 3 cenários e documentos bilíngues."
         : "Investor-ready financial plan with 12-month projections, 3 scenarios and bilingual documents.",
-      price: "$800–$1,500",
+      price: "From $800",
     },
     {
       icon: <BookOpen size={20} />,
@@ -75,7 +75,7 @@ export default function Home() {
       desc: lang === "pt"
         ? "Auditoria linha a linha dos seus números com benchmarks reais do setor — sem pontos cegos."
         : "Line-by-line audit of your financials against real industry benchmarks — no blind spots.",
-      price: "$300–$500",
+      price: "From $300",
     },
     {
       icon: <Users size={20} />,
@@ -83,7 +83,7 @@ export default function Home() {
       desc: lang === "pt"
         ? "Business Plan + P&L Review juntos — tudo que você precisa antes de abrir as portas ou falar com um investidor."
         : "Business Plan + P&L Review combined — everything you need before opening day or investor conversations.",
-      price: "$1,000–$1,800",
+      price: "From $1,000",
     },
   ];
 
