@@ -4,7 +4,7 @@ export interface Course {
   descKey: string;
   category: string;
   categoryKey: string;
-  instructor: "dr. mahala" | "guilherme";
+  instructor: "mahala" | "guilherme";
   lessons: number;
   hours: number;
   priceUsd: number;
@@ -12,10 +12,12 @@ export interface Course {
   originalPriceBrl: number;
   icon: string;
   image: string;
+  gumroadUrl?: string;
+  status?: "available" | "coming-soon";
 }
 
 export const courses: Course[] = [
-   {
+  {
     id: "resume-workshop",
     nameKey: "course.resumeWorkshop",
     descKey: "course.resumeWorkshop.desc",
@@ -26,9 +28,11 @@ export const courses: Course[] = [
     hours: 1,
     priceUsd: 27,
     priceBrl: 147,
+    originalPriceBrl: 197,
     icon: "CV",
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310419663029168482/M83iGP6sVHFT6vazqWgrVe/course-international-career-NGsnsyCGWKryZkmWEkw4BL.webp",
     gumroadUrl: "https://mahguiacademy.gumroad.com/l/international-resume-workshop",
+    status: "available",
   },
   {
     id: "hotel-accounting",
@@ -41,8 +45,10 @@ export const courses: Course[] = [
     hours: 4,
     priceUsd: 37,
     priceBrl: 197,
+    originalPriceBrl: 197,
     icon: "R$",
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310419663029168482/M83iGP6sVHFT6vazqWgrVe/course-hotel-accounting-n6V7wCa9mi6S3JvcS2SMuD.webp",
+    status: "coming-soon",
   },
   {
     id: "revenue-management",
@@ -55,8 +61,10 @@ export const courses: Course[] = [
     hours: 5,
     priceUsd: 37,
     priceBrl: 197,
+    originalPriceBrl: 197,
     icon: "Rev",
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310419663029168482/M83iGP6sVHFT6vazqWgrVe/course-revenue-management-WxjaUmjBMfgc9WwUwsfKoa.webp",
+    status: "coming-soon",
   },
   {
     id: "financial-statements",
@@ -69,8 +77,10 @@ export const courses: Course[] = [
     hours: 4.5,
     priceUsd: 37,
     priceBrl: 197,
+    originalPriceBrl: 197,
     icon: "DRE",
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310419663029168482/M83iGP6sVHFT6vazqWgrVe/course-financial-statements-95aYWmeKMs8z2gdzSug4tm.webp",
+    status: "coming-soon",
   },
   {
     id: "excel-hospitality",
@@ -83,8 +93,10 @@ export const courses: Course[] = [
     hours: 6,
     priceUsd: 37,
     priceBrl: 197,
+    originalPriceBrl: 197,
     icon: "XLS",
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310419663029168482/M83iGP6sVHFT6vazqWgrVe/course-excel-hospitality-Gz9JyTqwQbhQBjQRu6cgfU.webp",
+    status: "coming-soon",
   },
   {
     id: "strategic-pricing",
@@ -97,8 +109,10 @@ export const courses: Course[] = [
     hours: 4,
     priceUsd: 37,
     priceBrl: 197,
+    originalPriceBrl: 197,
     icon: "Price",
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310419663029168482/M83iGP6sVHFT6vazqWgrVe/course-strategic-pricing-U3MnxuLgJDqaMk7DYgzMij.webp",
+    status: "coming-soon",
   },
   {
     id: "leadership",
@@ -111,8 +125,10 @@ export const courses: Course[] = [
     hours: 3.5,
     priceUsd: 37,
     priceBrl: 197,
+    originalPriceBrl: 197,
     icon: "Lead",
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310419663029168482/M83iGP6sVHFT6vazqWgrVe/course-leadership-Ux43u7Pndj7YL4tQkE9T68.webp",
+    status: "coming-soon",
   },
   {
     id: "intro-hospitality",
@@ -125,8 +141,10 @@ export const courses: Course[] = [
     hours: 5,
     priceUsd: 37,
     priceBrl: 197,
+    originalPriceBrl: 197,
     icon: "HM",
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310419663029168482/M83iGP6sVHFT6vazqWgrVe/course-intro-hospitality-kPdi27hzgCxRUQZ8c5ghSG.webp",
+    status: "coming-soon",
   },
   {
     id: "international-career",
@@ -139,8 +157,10 @@ export const courses: Course[] = [
     hours: 3,
     priceUsd: 37,
     priceBrl: 197,
+    originalPriceBrl: 197,
     icon: "Globe",
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310419663029168482/M83iGP6sVHFT6vazqWgrVe/course-international-career-NGsnsyCGWKryZkmWEkw4BL.webp",
+    status: "coming-soon",
   },
   {
     id: "fleet-management",
@@ -153,8 +173,10 @@ export const courses: Course[] = [
     hours: 4,
     priceUsd: 37,
     priceBrl: 197,
+    originalPriceBrl: 197,
     icon: "Fleet",
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310419663029168482/M83iGP6sVHFT6vazqWgrVe/course-fleet-management-WQcXKKKS9SryQgDL4A2ByJ.webp",
+    status: "coming-soon",
   },
   {
     id: "uae-real-estate",
@@ -167,8 +189,10 @@ export const courses: Course[] = [
     hours: 5,
     priceUsd: 37,
     priceBrl: 197,
+    originalPriceBrl: 197,
     icon: "UAE",
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310419663029168482/M83iGP6sVHFT6vazqWgrVe/course-uae-real-estate-McJzzKTmxCPRcbF4FsNgxu.webp",
+    status: "coming-soon",
   },
 ];
 
