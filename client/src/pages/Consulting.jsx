@@ -1,10 +1,35 @@
+/*
+ * MahGui Consulting Page — v2
+ * Colors: Rose #D4537E · Bordeaux #6B1A2E · Gold #A8852C
+ * Integrated with MahGui Academy Navbar + Footer
+ */
 import { useState, useEffect, useRef } from "react";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+
+const ROSE    = "#D4537E";
+const NAVY    = "#6B1A2E";
+const GOLD    = "#A8852C";
+const INK     = "#1a1714";
+const PAPER   = "#f6f2ec";
+const WARM    = "#efe8de";
+const CARD    = "#fffdfa";
+const MUTED   = "#8a8278";
+const SOFT    = "#4a443d";
+
+const WA = "971521735949";
+function waLink(msg: string) {
+  return `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+}
 
 const services = [
   {
     icon: "📊",
     title: "Business Plan Development",
     subtitle: "Investor-Ready from Day One",
+    price: "$800 – $1,500",
+    tag: "Most Requested",
+    tagColor: GOLD,
     description:
       "Full business plan built for real scrutiny — not just a template. We map your concept, market opportunity, competitive positioning, and financial projections into a document that can stand in front of a bank, an investor, or a business partner.",
     deliverables: [
@@ -17,13 +42,14 @@ const services = [
       "Risk analysis & mitigation strategies",
       "Bilingual (EN/PT) available",
     ],
-    tag: "Most Requested",
-    tagColor: "#B8860B",
   },
   {
     icon: "🔍",
     title: "P&L Review & Cost Analysis",
     subtitle: "Know Where Your Money Really Goes",
+    price: "$300 – $500",
+    tag: "High Impact",
+    tagColor: NAVY,
     description:
       "You'd be surprised how many hospitality businesses are running with blind spots in their cost structure. We go line by line through your P&L, benchmark every metric against industry standards, and flag what's off — before it becomes a crisis.",
     deliverables: [
@@ -35,8 +61,24 @@ const services = [
       "Corrected projections with actionable targets",
       "KPI dashboard recommendation",
     ],
-    tag: "High Impact",
-    tagColor: "#1A3A5C",
+  },
+  {
+    icon: "📦",
+    title: "Complete Package",
+    subtitle: "Everything Before Opening Day",
+    price: "$1,000 – $1,800",
+    tag: "Best Value",
+    tagColor: ROSE,
+    description:
+      "Business Plan + P&L Review combined — everything you need before talking to an investor or opening your doors. Includes one revision round and a full walkthrough so you own every number.",
+    deliverables: [
+      "Everything in Business Plan",
+      "Full P&L audit & benchmarks",
+      "Hidden cost identification",
+      "KPI dashboard recommendation",
+      "1 revision round included",
+      "Delivery in 7–10 business days",
+    ],
   },
 ];
 
@@ -47,40 +89,103 @@ const process = [
   { step: "04", title: "Delivery & Walkthrough", desc: "You receive a polished, investor-ready document. We walk through every number together so you own it completely." },
 ];
 
-const stats = [
-  { value: "10+", label: "Years in Hospitality Finance" },
-  { value: "3", label: "Continents of Industry Experience" },
-  { value: "PhD", label: "Hospitality Finance, UCF" },
-  { value: "2", label: "Published Academic Books" },
+const credentials = [
+  { icon: "🎓", title: "PhD, Hospitality Finance — UCF", desc: "Specialized in equity returns, financial performance, and capital structure in hospitality firms." },
+  { icon: "🇦🇪", title: "UAE MOHESR Recognized Qualification", desc: "Officially recognized by the UAE Ministry of Higher Education & Scientific Research. Doc. No. 2026053034." },
+  { icon: "📖", title: "Published Author — Kendall Hunt", desc: "Co-author of Financial Management for the Hospitality Industry. Research in Cornell Hospitality Quarterly, Tourism Economics, JHTT." },
+  { icon: "👩‍🏫", title: "Assistant Professor, Les Roches Abu Dhabi", desc: "Teaches hospitality finance, revenue management, and analytics at BBA and MSc levels." },
 ];
 
-function useInView(threshold = 0.15) {
-  const ref = useRef(null);
-  const [inView, setInView] = useState(false);
+const caseMetrics = [
+  { val: "$370K", lbl: "Investment justified" },
+  { val: "3",     lbl: "Financial scenarios modeled" },
+  { val: "12mo",  lbl: "Month-by-month projection" },
+  { val: "14–18", lbl: "Month payback (base case)" },
+];
+
+const caseDeliverables = [
+  "Full financial audit — identified $25K+/month in missing costs",
+  "Corrected COGS (34% → 40%) and labor (25% → 30%) with real benchmarks",
+  "12-month ramp-up model starting at 60 covers/day",
+  "3 scenarios: conservative, base case & optimistic",
+  "Florida liquor license analysis (SRX vs. 4COP)",
+  "Investor-ready bilingual business plan (EN + PT)",
+];
+
+function useReveal(threshold = 0.12) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
   useEffect(() => {
     const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setInView(true); },
+      ([e]) => { if (e.isIntersecting) setVisible(true); },
       { threshold }
     );
     if (ref.current) obs.observe(ref.current);
     return () => obs.disconnect();
   }, []);
-  return [ref, inView];
+  return [ref, visible] as const;
 }
 
-function FadeIn({ children, delay = 0, className = "" }) {
-  const [ref, inView] = useInView();
+function Reveal({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
+  const [ref, visible] = useReveal();
   return (
     <div
       ref={ref}
       className={className}
       style={{
-        opacity: inView ? 1 : 0,
-        transform: inView ? "translateY(0)" : "translateY(28px)",
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(28px)",
         transition: `opacity 0.7s ease ${delay}s, transform 0.7s ease ${delay}s`,
       }}
     >
       {children}
+    </div>
+  );
+}
+
+function AnimatedChart() {
+  const [animated, setAnimated] = useState(false);
+  useEffect(() => { const t = setTimeout(() => setAnimated(true), 700); return () => clearTimeout(t); }, []);
+  const bars = [
+    { month: "Mo. 1", height: 8,   value: "-$4k"  },
+    { month: "Mo. 2", height: 18,  value: "$7k"   },
+    { month: "Mo. 3", height: 30,  value: "$18k"  },
+    { month: "Mo. 4", height: 46,  value: "$34k"  },
+    { month: "Mo. 6", height: 62,  value: "$61k"  },
+    { month: "Mo. 9", height: 78,  value: "$93k"  },
+    { month: "Mo. 12",height: 100, value: "$126k" },
+  ];
+  return (
+    <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: 40 }}>
+      <div style={{ color: "rgba(255,255,255,0.3)", fontFamily: "sans-serif", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 28 }}>
+        Net Profit — 12-Month Ramp-Up
+      </div>
+      <div style={{ display: "flex", alignItems: "flex-end", gap: 10, height: 160, width: "100%" }}>
+        {bars.map((b, i) => (
+          <div key={i} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <div style={{ position: "relative", width: "100%", display: "flex", alignItems: "flex-end", height: 140 }}>
+              <div style={{
+                width: "100%",
+                height: animated ? `${b.height}%` : "0%",
+                borderRadius: "4px 4px 0 0",
+                background: `linear-gradient(180deg, ${ROSE}, rgba(212,83,126,0.3))`,
+                transition: "height 1.2s cubic-bezier(0.34,1.56,0.64,1)",
+                position: "relative",
+              }}>
+                {animated && (
+                  <span style={{ position: "absolute", top: -20, left: "50%", transform: "translateX(-50%)", fontSize: 10, color: ROSE, fontWeight: 500, whiteSpace: "nowrap" }}>
+                    {b.value}
+                  </span>
+                )}
+              </div>
+            </div>
+            <div style={{ fontFamily: "sans-serif", fontSize: 10, color: "rgba(255,255,255,0.35)", textAlign: "center", marginTop: 6 }}>{b.month}</div>
+          </div>
+        ))}
+      </div>
+      <div style={{ marginTop: 20, fontFamily: "sans-serif", fontSize: 11, color: `${ROSE}90`, letterSpacing: "0.1em" }}>
+        Base Case · 240 covers/day at Month 12
+      </div>
     </div>
   );
 }
@@ -91,846 +196,424 @@ export default function Consulting() {
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = () => {
-    if (formData.name && formData.email) {
-      const message = `Hi Mahala! 👋 I am interested in MahGui Consulting.\n\n*Name:* ${formData.name}\n*Email:* ${formData.email}\n*Concept:* ${formData.concept || "Not specified"}\n*Message:* ${formData.message || "Not specified"}`;
-      const encoded = encodeURIComponent(message);
-      window.open(`https://wa.me/971521735949?text=${encoded}`, "_blank");
-      setSubmitted(true);
-    }
+    if (!formData.name || !formData.email) return;
+    const msg = `Hi Mahala! 👋 I'm interested in MahGui Consulting.\n\n*Name:* ${formData.name}\n*Email:* ${formData.email}\n*Concept:* ${formData.concept || "Not specified"}\n*Message:* ${formData.message || "Not specified"}`;
+    window.open(waLink(msg), "_blank");
+    setSubmitted(true);
+  };
+
+  const s = {
+    eyebrow: {
+      fontFamily: "sans-serif",
+      fontSize: 11,
+      fontWeight: 600,
+      letterSpacing: "0.2em",
+      textTransform: "uppercase" as const,
+      color: GOLD,
+      marginBottom: 18,
+      display: "flex",
+      alignItems: "center",
+      gap: 12,
+    } as React.CSSProperties,
   };
 
   return (
-    <div style={{ fontFamily: "'Cormorant Garamond', 'Georgia', serif", background: "#FAFAF7", color: "#1A1A1A", minHeight: "100vh" }}>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap');
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-
-        .consulting-hero {
-          min-height: 92vh;
-          background: #0F1E2E;
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          overflow: hidden;
-          position: relative;
-        }
-        @media (max-width: 768px) {
-          .consulting-hero { grid-template-columns: 1fr; min-height: auto; }
-          .hero-visual { display: none; }
-          .hero-content { padding: 80px 32px 60px; }
-          .stats-grid { grid-template-columns: 1fr 1fr; }
-          .services-grid { grid-template-columns: 1fr; }
-          .process-grid { grid-template-columns: 1fr 1fr; }
-          .contact-grid { grid-template-columns: 1fr; }
-        }
-
-        .hero-content {
-          padding: 100px 64px 80px;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          position: relative;
-          z-index: 2;
-        }
-
-        .hero-visual {
-          position: relative;
-          overflow: hidden;
-          background: linear-gradient(135deg, #1A3A5C 0%, #0F1E2E 60%);
-        }
-
-        .hero-visual::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background:
-            radial-gradient(ellipse 60% 50% at 70% 40%, rgba(184,134,11,0.18) 0%, transparent 70%),
-            radial-gradient(ellipse 40% 60% at 30% 70%, rgba(26,58,92,0.5) 0%, transparent 60%);
-        }
-
-        .hero-grid-overlay {
-          position: absolute;
-          inset: 0;
-          background-image:
-            linear-gradient(rgba(184,134,11,0.06) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(184,134,11,0.06) 1px, transparent 1px);
-          background-size: 48px 48px;
-        }
-
-        .hero-chart {
-          position: absolute;
-          bottom: 60px;
-          left: 50%;
-          transform: translateX(-50%);
-          display: flex;
-          align-items: flex-end;
-          gap: 10px;
-          padding: 32px;
-          background: rgba(255,255,255,0.04);
-          border: 1px solid rgba(184,134,11,0.2);
-          border-radius: 12px;
-          backdrop-filter: blur(8px);
-          width: 320px;
-        }
-
-        .chart-bar {
-          flex: 1;
-          border-radius: 4px 4px 0 0;
-          background: linear-gradient(180deg, #B8860B, rgba(184,134,11,0.3));
-          transition: height 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-          position: relative;
-        }
-
-        .chart-label {
-          font-family: 'DM Sans', sans-serif;
-          font-size: 10px;
-          color: rgba(255,255,255,0.4);
-          text-align: center;
-          margin-top: 6px;
-        }
-
-        .chart-value {
-          position: absolute;
-          top: -22px;
-          left: 50%;
-          transform: translateX(-50%);
-          font-family: 'DM Sans', sans-serif;
-          font-size: 10px;
-          color: #B8860B;
-          white-space: nowrap;
-          font-weight: 500;
-        }
-
-        .eyebrow {
-          font-family: 'DM Sans', sans-serif;
-          font-size: 11px;
-          font-weight: 500;
-          letter-spacing: 0.2em;
-          text-transform: uppercase;
-          color: #B8860B;
-          margin-bottom: 24px;
-          display: flex;
-          align-items: center;
-          gap: 12px;
-        }
-        .eyebrow::before {
-          content: '';
-          display: block;
-          width: 32px;
-          height: 1px;
-          background: #B8860B;
-        }
-
-        .hero-title {
-          font-size: clamp(42px, 5vw, 72px);
-          font-weight: 300;
-          line-height: 1.05;
-          color: #FFFFFF;
-          margin-bottom: 8px;
-          letter-spacing: -0.02em;
-        }
-        .hero-title em {
-          font-style: italic;
-          color: #B8860B;
-        }
-
-        .hero-subtitle {
-          font-family: 'DM Sans', sans-serif;
-          font-size: 16px;
-          font-weight: 300;
-          color: rgba(255,255,255,0.55);
-          line-height: 1.7;
-          margin-bottom: 48px;
-          max-width: 480px;
-        }
-
-        .hero-cta {
-          display: inline-flex;
-          align-items: center;
-          gap: 12px;
-          background: #B8860B;
-          color: #0F1E2E;
-          font-family: 'DM Sans', sans-serif;
-          font-size: 14px;
-          font-weight: 500;
-          letter-spacing: 0.05em;
-          padding: 16px 32px;
-          border: none;
-          cursor: pointer;
-          text-decoration: none;
-          transition: all 0.25s ease;
-          align-self: flex-start;
-        }
-        .hero-cta:hover {
-          background: #D4A017;
-          transform: translateY(-2px);
-          box-shadow: 0 8px 24px rgba(184,134,11,0.3);
-        }
-        .hero-cta-arrow { transition: transform 0.25s ease; }
-        .hero-cta:hover .hero-cta-arrow { transform: translateX(4px); }
-
-        .section { padding: 100px 64px; }
-        @media (max-width: 768px) { .section { padding: 64px 32px; } }
-
-        .section-label {
-          font-family: 'DM Sans', sans-serif;
-          font-size: 11px;
-          font-weight: 500;
-          letter-spacing: 0.2em;
-          text-transform: uppercase;
-          color: #B8860B;
-          margin-bottom: 16px;
-        }
-
-        .section-title {
-          font-size: clamp(32px, 4vw, 52px);
-          font-weight: 300;
-          line-height: 1.1;
-          letter-spacing: -0.02em;
-          margin-bottom: 16px;
-        }
-        .section-title em { font-style: italic; color: #B8860B; }
-
-        .section-body {
-          font-family: 'DM Sans', sans-serif;
-          font-size: 16px;
-          font-weight: 300;
-          color: #555;
-          line-height: 1.75;
-          max-width: 560px;
-        }
-
-        .stats-grid {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 1px;
-          background: #E8E4DC;
-          margin-top: 64px;
-        }
-
-        .stat-card {
-          background: #FAFAF7;
-          padding: 40px 32px;
-          text-align: center;
-        }
-
-        .stat-value {
-          font-size: 48px;
-          font-weight: 300;
-          color: #0F1E2E;
-          line-height: 1;
-          margin-bottom: 8px;
-          letter-spacing: -0.03em;
-        }
-
-        .stat-label {
-          font-family: 'DM Sans', sans-serif;
-          font-size: 12px;
-          color: #888;
-          letter-spacing: 0.05em;
-          text-transform: uppercase;
-        }
-
-        .services-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 24px;
-          margin-top: 56px;
-        }
-
-        .service-card {
-          border: 1px solid #E8E4DC;
-          padding: 48px 40px;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          position: relative;
-          background: #FAFAF7;
-        }
-        .service-card.active {
-          background: #0F1E2E;
-          border-color: #0F1E2E;
-        }
-        .service-card:hover:not(.active) {
-          border-color: #B8860B;
-          transform: translateY(-4px);
-          box-shadow: 0 16px 40px rgba(0,0,0,0.08);
-        }
-
-        .service-tag {
-          position: absolute;
-          top: 24px;
-          right: 24px;
-          font-family: 'DM Sans', sans-serif;
-          font-size: 10px;
-          font-weight: 500;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          padding: 4px 10px;
-          border-radius: 2px;
-        }
-
-        .service-icon { font-size: 32px; margin-bottom: 20px; display: block; }
-
-        .service-title {
-          font-size: 24px;
-          font-weight: 400;
-          margin-bottom: 4px;
-          transition: color 0.3s;
-        }
-        .service-card.active .service-title { color: #FFFFFF; }
-
-        .service-subtitle {
-          font-family: 'DM Sans', sans-serif;
-          font-size: 13px;
-          color: #B8860B;
-          margin-bottom: 16px;
-          font-weight: 400;
-          letter-spacing: 0.04em;
-        }
-
-        .service-desc {
-          font-family: 'DM Sans', sans-serif;
-          font-size: 14px;
-          line-height: 1.7;
-          color: #666;
-          margin-bottom: 24px;
-          transition: color 0.3s;
-        }
-        .service-card.active .service-desc { color: rgba(255,255,255,0.65); }
-
-        .service-deliverables {
-          list-style: none;
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-        }
-        .service-deliverables li {
-          font-family: 'DM Sans', sans-serif;
-          font-size: 13px;
-          color: #555;
-          display: flex;
-          align-items: flex-start;
-          gap: 10px;
-          line-height: 1.5;
-          transition: color 0.3s;
-        }
-        .service-card.active .service-deliverables li { color: rgba(255,255,255,0.7); }
-        .service-deliverables li::before {
-          content: '→';
-          color: #B8860B;
-          font-size: 12px;
-          flex-shrink: 0;
-          margin-top: 2px;
-        }
-
-        .process-section {
-          background: #0F1E2E;
-          padding: 100px 64px;
-        }
-        @media (max-width: 768px) { .process-section { padding: 64px 32px; } }
-
-        .process-grid {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 1px;
-          background: rgba(255,255,255,0.08);
-          margin-top: 64px;
-        }
-
-        .process-step {
-          background: #0F1E2E;
-          padding: 40px 32px;
-          position: relative;
-          overflow: hidden;
-        }
-        .process-step::after {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          height: 2px;
-          background: #B8860B;
-          transform: scaleX(0);
-          transition: transform 0.4s ease;
-          transform-origin: left;
-        }
-        .process-step:hover::after { transform: scaleX(1); }
-
-        .step-number {
-          font-size: 56px;
-          font-weight: 300;
-          color: rgba(184,134,11,0.2);
-          line-height: 1;
-          margin-bottom: 24px;
-          letter-spacing: -0.04em;
-        }
-
-        .step-title {
-          font-size: 20px;
-          font-weight: 400;
-          color: #FFFFFF;
-          margin-bottom: 12px;
-        }
-
-        .step-desc {
-          font-family: 'DM Sans', sans-serif;
-          font-size: 14px;
-          color: rgba(255,255,255,0.5);
-          line-height: 1.7;
-        }
-
-        .about-section {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 0;
-          background: #F4F1EB;
-        }
-        @media (max-width: 768px) { .about-section { grid-template-columns: 1fr; } }
-
-        .about-content {
-          padding: 100px 64px;
-        }
-        @media (max-width: 768px) { .about-content { padding: 64px 32px; } }
-
-        .about-visual {
-          background: #1A3A5C;
-          padding: 100px 64px;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          position: relative;
-          overflow: hidden;
-        }
-        .about-visual::before {
-          content: '';
-          position: absolute;
-          top: -50%;
-          right: -30%;
-          width: 400px;
-          height: 400px;
-          border-radius: 50%;
-          background: radial-gradient(circle, rgba(184,134,11,0.15) 0%, transparent 70%);
-        }
-
-        .credential {
-          display: flex;
-          align-items: flex-start;
-          gap: 20px;
-          padding: 24px 0;
-          border-bottom: 1px solid rgba(255,255,255,0.1);
-          position: relative;
-          z-index: 1;
-        }
-        .credential:last-child { border-bottom: none; }
-
-        .credential-icon {
-          width: 40px;
-          height: 40px;
-          background: rgba(184,134,11,0.15);
-          border: 1px solid rgba(184,134,11,0.3);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 18px;
-          flex-shrink: 0;
-        }
-
-        .credential-title {
-          font-size: 16px;
-          font-weight: 400;
-          color: #FFFFFF;
-          margin-bottom: 4px;
-        }
-
-        .credential-desc {
-          font-family: 'DM Sans', sans-serif;
-          font-size: 13px;
-          color: rgba(255,255,255,0.5);
-          line-height: 1.5;
-        }
-
-        .contact-section {
-          padding: 100px 64px;
-          background: #FAFAF7;
-        }
-        @media (max-width: 768px) { .contact-section { padding: 64px 32px; } }
-
-        .contact-grid {
-          display: grid;
-          grid-template-columns: 1fr 1.4fr;
-          gap: 80px;
-          margin-top: 56px;
-          align-items: start;
-        }
-
-        .contact-info-title {
-          font-size: 28px;
-          font-weight: 300;
-          margin-bottom: 16px;
-        }
-
-        .contact-info-body {
-          font-family: 'DM Sans', sans-serif;
-          font-size: 15px;
-          color: #666;
-          line-height: 1.75;
-          margin-bottom: 40px;
-        }
-
-        .contact-detail {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          margin-bottom: 16px;
-          font-family: 'DM Sans', sans-serif;
-          font-size: 14px;
-          color: #444;
-        }
-        .contact-detail-icon {
-          width: 36px;
-          height: 36px;
-          background: #F4F1EB;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 16px;
-        }
-
-        .form-field {
-          display: flex;
-          flex-direction: column;
-          gap: 6px;
-          margin-bottom: 20px;
-        }
-
-        .form-label {
-          font-family: 'DM Sans', sans-serif;
-          font-size: 11px;
-          font-weight: 500;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          color: #888;
-        }
-
-        .form-input {
-          font-family: 'DM Sans', sans-serif;
-          font-size: 14px;
-          color: #1A1A1A;
-          background: #F4F1EB;
-          border: 1px solid transparent;
-          padding: 14px 16px;
-          outline: none;
-          transition: border-color 0.2s;
-          resize: none;
-          width: 100%;
-        }
-        .form-input:focus { border-color: #B8860B; }
-        .form-input::placeholder { color: #AAA; }
-
-        .form-submit {
-          width: 100%;
-          background: #0F1E2E;
-          color: #FFFFFF;
-          font-family: 'DM Sans', sans-serif;
-          font-size: 13px;
-          font-weight: 500;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          padding: 18px;
-          border: none;
-          cursor: pointer;
-          transition: all 0.25s ease;
-          margin-top: 8px;
-        }
-        .form-submit:hover {
-          background: #1A3A5C;
-          transform: translateY(-2px);
-          box-shadow: 0 8px 24px rgba(15,30,46,0.2);
-        }
-
-        .success-message {
-          text-align: center;
-          padding: 48px 32px;
-          background: #F4F1EB;
-        }
-        .success-icon { font-size: 48px; margin-bottom: 16px; display: block; }
-        .success-title { font-size: 28px; font-weight: 300; margin-bottom: 12px; }
-        .success-body { font-family: 'DM Sans', sans-serif; font-size: 15px; color: #666; line-height: 1.7; }
-      `}</style>
+    <div style={{ fontFamily: "'Georgia', serif", background: PAPER, color: INK, minHeight: "100vh" }}>
+      <Navbar />
 
       {/* ── HERO ── */}
-      <section className="consulting-hero">
-        <div className="hero-content">
-          <div className="eyebrow">MahGui Consulting</div>
-          <h1 className="hero-title">
-            Your numbers<br />
-            should tell a<br />
-            <em>compelling story.</em>
+      <section style={{
+        paddingTop: 72,
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        minHeight: "90vh",
+        background: INK,
+        overflow: "hidden",
+      }}>
+        <style>{`
+          @media(max-width:768px){
+            .c-hero{grid-template-columns:1fr!important;min-height:auto!important}
+            .c-hero-visual{display:none!important}
+            .c-hero-content{padding:80px 28px 60px!important}
+            .c-services-grid{grid-template-columns:1fr!important}
+            .c-process-grid{grid-template-columns:1fr 1fr!important}
+            .c-about-grid{grid-template-columns:1fr!important}
+            .c-contact-grid{grid-template-columns:1fr!important}
+            .c-pricing-grid{grid-template-columns:1fr!important}
+            .c-case-grid{grid-template-columns:1fr!important}
+            .c-stats-grid{grid-template-columns:1fr 1fr!important}
+            .c-cred-grid{grid-template-columns:1fr!important}
+          }
+        `}</style>
+        {/* left */}
+        <div className="c-hero-content" style={{ padding: "110px 64px 80px", display: "flex", flexDirection: "column", justifyContent: "center", position: "relative", zIndex: 2 }}>
+          <div style={{ ...s.eyebrow }}>
+            <span style={{ display: "block", width: 32, height: 1, background: GOLD }} />
+            MahGui Consulting
+          </div>
+          <h1 style={{ fontSize: "clamp(40px,5vw,68px)", fontWeight: 300, lineHeight: 1.05, color: "#fff", marginBottom: 8, letterSpacing: "-0.02em" }}>
+            Your numbers<br />should tell a<br /><em style={{ fontStyle: "italic", color: ROSE }}>compelling story.</em>
           </h1>
-          <p className="hero-subtitle">
+          <p style={{ fontFamily: "sans-serif", fontSize: 16, fontWeight: 300, color: "rgba(255,255,255,0.55)", lineHeight: 1.7, marginBottom: 48, maxWidth: 480 }}>
             Hospitality finance consulting for entrepreneurs who want investor-ready financials, honest analysis, and zero surprises on opening day.
           </p>
-          <a href="#contact" className="hero-cta">
-            Book a Discovery Call
-            <span className="hero-cta-arrow">→</span>
+          <a href="#contact" style={{ display: "inline-flex", alignItems: "center", gap: 12, background: ROSE, color: "#fff", fontFamily: "sans-serif", fontSize: 14, fontWeight: 500, letterSpacing: "0.05em", padding: "16px 32px", border: "none", cursor: "pointer", textDecoration: "none", alignSelf: "flex-start", borderRadius: 2, transition: "all 0.25s" }}>
+            Book a Discovery Call →
           </a>
         </div>
-        <div className="hero-visual">
-          <div className="hero-grid-overlay" />
+        {/* right chart */}
+        <div className="c-hero-visual" style={{ position: "relative", background: `linear-gradient(135deg, ${NAVY} 0%, ${INK} 70%)`, overflow: "hidden" }}>
+          <div style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(${ROSE}08 1px,transparent 1px),linear-gradient(90deg,${ROSE}08 1px,transparent 1px)`, backgroundSize: "48px 48px" }} />
           <AnimatedChart />
         </div>
       </section>
 
-      {/* ── ABOUT ── */}
-      <section className="section" style={{ background: "#FAFAF7" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <FadeIn>
-            <div className="section-label">The Approach</div>
-            <h2 className="section-title">Finance that <em>makes sense</em><br />for real operators.</h2>
-            <p className="section-body">
+      {/* ── VERIFIED STRIP ── */}
+      <div style={{ background: WARM, borderBottom: `1px solid rgba(26,23,20,0.08)`, padding: "18px 0" }}>
+        <div style={{ maxWidth: 1140, margin: "0 auto", padding: "0 32px", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "center", gap: 40 }}>
+          {[
+            { icon: "🎓", text: "Ph.D. UCF", sub: "Verifiable via Parchment", href: "https://www.parchment.com/u/s/14Xd" },
+            { icon: "🇦🇪", text: "UAE MOHESR Recognized", sub: "Doc. 2026053034 · uaeVerify.gov.ae", href: "https://uaeverify.gov.ae" },
+            { icon: "🏆", text: "ICHRIE Best Paper 2026", sub: "International hospitality research award", href: "#" },
+            { icon: "📚", text: "Kendall Hunt Published", sub: "Financial Management for Hospitality", href: "https://he.kendallhunt.com/product/financial-management-hospitality-industry" },
+          ].map((item, i) => (
+            <a key={i} href={item.href} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
+              <span style={{ fontSize: 18 }}>{item.icon}</span>
+              <div>
+                <div style={{ fontFamily: "sans-serif", fontSize: 12, fontWeight: 600, color: INK }}>{item.text}</div>
+                <div style={{ fontFamily: "sans-serif", fontSize: 10, color: MUTED }}>{item.sub}</div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      {/* ── APPROACH ── */}
+      <section style={{ padding: "96px 64px", background: CARD, maxWidth: "100%" }}>
+        <div style={{ maxWidth: 1140, margin: "0 auto" }}>
+          <Reveal>
+            <div style={s.eyebrow}>The Approach</div>
+            <h2 style={{ fontSize: "clamp(30px,4vw,50px)", fontWeight: 300, lineHeight: 1.1, letterSpacing: "-0.02em", marginBottom: 16 }}>
+              Finance that <em style={{ fontStyle: "italic", color: ROSE }}>makes sense</em><br />for real operators.
+            </h2>
+            <p style={{ fontFamily: "sans-serif", fontSize: 16, fontWeight: 300, color: SOFT, lineHeight: 1.75, maxWidth: 560 }}>
               Most business plans look good on paper and fall apart in the first quarter. We build financial models grounded in actual market data — real food costs, real labor rates, real ramp-up curves — so you walk into every conversation with confidence and no blind spots.
             </p>
-          </FadeIn>
-          <FadeIn delay={0.15}>
-            <div className="stats-grid">
-              {stats.map((s, i) => (
-                <div className="stat-card" key={i}>
-                  <div className="stat-value">{s.value}</div>
-                  <div className="stat-label">{s.label}</div>
+          </Reveal>
+          {/* Stats */}
+          <Reveal delay={0.15}>
+            <div className="c-stats-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 1, background: "#E8E4DC", marginTop: 64 }}>
+              {[
+                { val: "10+", lbl: "Years in Hospitality Finance" },
+                { val: "5",   lbl: "Countries of Industry Experience" },
+                { val: "PhD", lbl: "Hospitality Finance, UCF" },
+                { val: "2",   lbl: "Published Academic Books" },
+              ].map((st, i) => (
+                <div key={i} style={{ background: CARD, padding: "36px 28px", textAlign: "center" }}>
+                  <div style={{ fontSize: 44, fontWeight: 300, color: INK, lineHeight: 1, marginBottom: 8, letterSpacing: "-0.03em" }}>{st.val}</div>
+                  <div style={{ fontFamily: "sans-serif", fontSize: 12, color: MUTED, letterSpacing: "0.05em", textTransform: "uppercase" }}>{st.lbl}</div>
                 </div>
               ))}
             </div>
-          </FadeIn>
+          </Reveal>
         </div>
       </section>
 
       {/* ── SERVICES ── */}
-      <section className="section" style={{ background: "#F4F1EB", paddingTop: 80 }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <FadeIn>
-            <div className="section-label">Services</div>
-            <h2 className="section-title">What we <em>deliver.</em></h2>
-          </FadeIn>
-          <div className="services-grid">
-            {services.map((s, i) => (
-              <FadeIn key={i} delay={i * 0.1}>
+      <section style={{ padding: "80px 64px", background: WARM }}>
+        <div style={{ maxWidth: 1140, margin: "0 auto" }}>
+          <Reveal>
+            <div style={s.eyebrow}>Services</div>
+            <h2 style={{ fontSize: "clamp(28px,3.8vw,48px)", fontWeight: 300, lineHeight: 1.1, letterSpacing: "-0.02em", marginBottom: 56 }}>
+              What we <em style={{ fontStyle: "italic", color: ROSE }}>deliver.</em>
+            </h2>
+          </Reveal>
+          <div className="c-services-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 22 }}>
+            {services.map((sv, i) => (
+              <Reveal key={i} delay={i * 0.1}>
                 <div
-                  className={`service-card ${activeService === i ? "active" : ""}`}
                   onClick={() => setActiveService(i)}
+                  style={{
+                    border: `1px solid ${activeService === i ? ROSE : "#E8E4DC"}`,
+                    borderTop: `3px solid ${activeService === i ? ROSE : "transparent"}`,
+                    padding: "40px 32px",
+                    cursor: "pointer",
+                    background: activeService === i ? INK : CARD,
+                    transition: "all 0.3s",
+                    position: "relative",
+                  }}
                 >
-                  <span
-                    className="service-tag"
-                    style={{
-                      background: `${s.tagColor}18`,
-                      color: s.tagColor,
-                      border: `1px solid ${s.tagColor}40`,
-                    }}
-                  >
-                    {s.tag}
-                  </span>
-                  <span className="service-icon">{s.icon}</span>
-                  <h3 className="service-title">{s.title}</h3>
-                  <p className="service-subtitle">{s.subtitle}</p>
-                  <p className="service-desc">{s.description}</p>
-                  <ul className="service-deliverables">
-                    {s.deliverables.map((d, j) => (
-                      <li key={j}>{d}</li>
+                  <span style={{ position: "absolute", top: 18, right: 18, fontFamily: "sans-serif", fontSize: 10, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", padding: "3px 9px", borderRadius: 2, background: `${sv.tagColor}20`, color: sv.tagColor, border: `1px solid ${sv.tagColor}40` }}>{sv.tag}</span>
+                  <span style={{ fontSize: 28, marginBottom: 18, display: "block" }}>{sv.icon}</span>
+                  <h3 style={{ fontSize: 22, fontWeight: 400, marginBottom: 4, color: activeService === i ? "#fff" : INK }}>{sv.title}</h3>
+                  <div style={{ fontFamily: "sans-serif", fontSize: 12, color: ROSE, marginBottom: 6, letterSpacing: "0.04em" }}>{sv.subtitle}</div>
+                  <div style={{ fontFamily: "sans-serif", fontSize: 18, fontWeight: 600, color: ROSE, marginBottom: 16 }}>{sv.price}</div>
+                  <p style={{ fontFamily: "sans-serif", fontSize: 14, lineHeight: 1.7, color: activeService === i ? "rgba(255,255,255,0.65)" : "#666", marginBottom: 20 }}>{sv.description}</p>
+                  <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 7 }}>
+                    {sv.deliverables.map((d, j) => (
+                      <li key={j} style={{ fontFamily: "sans-serif", fontSize: 13, color: activeService === i ? "rgba(255,255,255,0.7)" : SOFT, display: "flex", alignItems: "flex-start", gap: 8, lineHeight: 1.5 }}>
+                        <span style={{ color: ROSE, flexShrink: 0, marginTop: 2 }}>→</span>{d}
+                      </li>
                     ))}
                   </ul>
                 </div>
-              </FadeIn>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
       {/* ── PROCESS ── */}
-      <section className="process-section">
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <FadeIn>
-            <div className="section-label" style={{ color: "#B8860B" }}>How It Works</div>
-            <h2 className="section-title" style={{ color: "#FFFFFF" }}>
-              From idea to<br /><em>investor-ready.</em>
+      <section style={{ background: INK, padding: "96px 64px" }}>
+        <div style={{ maxWidth: 1140, margin: "0 auto" }}>
+          <Reveal>
+            <div style={{ ...s.eyebrow }}>How It Works</div>
+            <h2 style={{ fontSize: "clamp(28px,3.8vw,48px)", fontWeight: 300, lineHeight: 1.1, letterSpacing: "-0.02em", marginBottom: 64, color: "#fff" }}>
+              From idea to<br /><em style={{ fontStyle: "italic", color: ROSE }}>investor-ready.</em>
             </h2>
-          </FadeIn>
-          <div className="process-grid">
+          </Reveal>
+          <div className="c-process-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 1, background: "rgba(255,255,255,0.08)" }}>
             {process.map((p, i) => (
-              <FadeIn key={i} delay={i * 0.1}>
-                <div className="process-step">
-                  <div className="step-number">{p.step}</div>
-                  <h4 className="step-title">{p.title}</h4>
-                  <p className="step-desc">{p.desc}</p>
+              <Reveal key={i} delay={i * 0.1}>
+                <div style={{ background: INK, padding: "36px 28px" }}>
+                  <div style={{ fontSize: 52, fontWeight: 300, color: `${ROSE}30`, lineHeight: 1, marginBottom: 20, letterSpacing: "-0.04em" }}>{p.step}</div>
+                  <h4 style={{ fontSize: 19, fontWeight: 400, color: "#fff", marginBottom: 10 }}>{p.title}</h4>
+                  <p style={{ fontFamily: "sans-serif", fontSize: 14, color: "rgba(255,255,255,0.55)", lineHeight: 1.7 }}>{p.desc}</p>
                 </div>
-              </FadeIn>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── CREDENTIALS ── */}
-      <section className="about-section">
-        <div className="about-content">
-          <FadeIn>
-            <div className="section-label">Who We Are</div>
-            <h2 className="section-title">
-              Academic rigor.<br /><em>Operator insight.</em>
+      {/* ── CASE STUDY ── */}
+      <section style={{ background: `${NAVY}f0`, padding: "96px 64px" }}>
+        <div style={{ maxWidth: 1140, margin: "0 auto" }}>
+          <Reveal>
+            <div style={{ ...s.eyebrow, color: ROSE }}>Case Study</div>
+            <h2 style={{ fontSize: "clamp(28px,3.8vw,44px)", fontWeight: 300, lineHeight: 1.1, letterSpacing: "-0.02em", marginBottom: 48, color: "#fff" }}>
+              From concept to investor-ready<br /><em style={{ fontStyle: "italic", color: ROSE }}>in one day.</em>
             </h2>
-            <p className="section-body" style={{ marginTop: 24 }}>
-              Dr. Mahala Geronasso holds a PhD in Hospitality Finance from UCF and has spent over a decade working in hospitality across Brazil, Switzerland, France, the US, and the UAE. She is co-author of <em>Financial Management for the Hospitality Industry</em> (Kendall Hunt, 2025) and publishes research in leading journals including Cornell Hospitality Quarterly and Tourism Economics.
-            </p>
-            <p className="section-body" style={{ marginTop: 16 }}>
-              MahGui Consulting brings that same analytical depth to entrepreneurs building real businesses — not academic exercises.
-            </p>
-          </FadeIn>
-        </div>
-        <div className="about-visual">
-          {[
-            { icon: "🎓", title: "PhD, Hospitality Finance", desc: "University of Central Florida — specialized in equity returns, financial performance, and capital structure in hospitality firms." },
-            { icon: "📖", title: "Published Author", desc: "Co-author of Financial Management for the Hospitality Industry. Published research in Cornell Hospitality Quarterly, Tourism Economics, JHTT." },
-            { icon: "🌍", title: "10+ Years, 5 Countries", desc: "Hands-on hospitality experience across Brazil, Switzerland, France, the United States, and the UAE." },
-            { icon: "👩‍🏫", title: "Assistant Professor, Les Roches", desc: "Currently teaches hospitality finance, revenue management, and analytics at Les Roches Abu Dhabi at BBA and MSc levels." },
-          ].map((c, i) => (
-            <FadeIn key={i} delay={i * 0.1}>
-              <div className="credential">
-                <div className="credential-icon">{c.icon}</div>
-                <div>
-                  <div className="credential-title">{c.title}</div>
-                  <div className="credential-desc">{c.desc}</div>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <div className="c-case-grid" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 16, padding: "44px 40px", display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: 56, alignItems: "center" }}>
+              <div>
+                <div style={{ fontFamily: "sans-serif", fontSize: 11, fontWeight: 600, letterSpacing: "0.18em", textTransform: "uppercase", color: ROSE, marginBottom: 18 }}>Samba Poke & Sushi — Orlando, FL</div>
+                <h3 style={{ fontSize: "clamp(20px,2.5vw,30px)", fontWeight: 400, color: "#fff", marginBottom: 16, lineHeight: 1.2 }}>Brazilian-Japanese AYCE Restaurant on International Drive</h3>
+                <p style={{ fontFamily: "sans-serif", fontSize: 15, color: "rgba(255,255,255,0.7)", lineHeight: 1.75, marginBottom: 28 }}>
+                  A Brazilian entrepreneur needed a business plan and financial audit for a premium sushi rodízio concept launching inside an established bakery on I-Drive. The original plan had significant gaps: underestimated COGS, missing cost categories, and no ramp-up projection. We rebuilt it from the ground up.
+                </p>
+                <div className="c-stats-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                  {caseMetrics.map((m, i) => (
+                    <div key={i} style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 10, padding: "16px 14px" }}>
+                      <div style={{ fontSize: 26, fontWeight: 600, color: "#fff", lineHeight: 1 }}>{m.val}</div>
+                      <div style={{ fontFamily: "sans-serif", fontSize: 11, color: "rgba(255,255,255,0.5)", marginTop: 4 }}>{m.lbl}</div>
+                    </div>
+                  ))}
                 </div>
               </div>
-            </FadeIn>
-          ))}
+              <div>
+                <h4 style={{ fontSize: 18, fontWeight: 400, color: "#fff", marginBottom: 18 }}>What we delivered</h4>
+                <ul style={{ listStyle: "none" }}>
+                  {caseDeliverables.map((d, i) => (
+                    <li key={i} style={{ fontFamily: "sans-serif", fontSize: 14, color: "rgba(255,255,255,0.72)", paddingLeft: 20, position: "relative", marginBottom: 10, lineHeight: 1.5 }}>
+                      <span style={{ position: "absolute", left: 0, color: ROSE }}>→</span>{d}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Testimonial */}
+          <Reveal delay={0.2}>
+            <div style={{ marginTop: 32, background: "rgba(255,255,255,0.04)", border: `1px solid ${ROSE}40`, borderLeft: `4px solid ${ROSE}`, borderRadius: 12, padding: "32px 36px" }}>
+              <div style={{ fontSize: 36, fontFamily: "Georgia,serif", color: ROSE, lineHeight: 1, marginBottom: 12 }}>"</div>
+              <p style={{ fontFamily: "sans-serif", fontSize: 16, color: "rgba(255,255,255,0.82)", fontStyle: "italic", lineHeight: 1.75, marginBottom: 20 }}>
+                Perfeito perfeito Mahala você é fantástica. O plano finalmente faz sentido e eu sei exatamente para onde vai cada dólar.
+              </p>
+              <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+                <div style={{ width: 42, height: 42, borderRadius: "50%", background: ROSE, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "sans-serif", fontWeight: 600, fontSize: 14, color: "#fff" }}>FA</div>
+                <div>
+                  <div style={{ fontFamily: "sans-serif", fontSize: 14, fontWeight: 600, color: "#fff" }}>Felipe Andre</div>
+                  <div style={{ fontFamily: "sans-serif", fontSize: 12, color: "rgba(255,255,255,0.45)" }}>Owner, Gostoso Bakery & Samba Poke and Sushi · Orlando, FL</div>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── ABOUT / CREDENTIALS ── */}
+      <section style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }} className="c-about-grid">
+        {/* left */}
+        <div style={{ background: WARM, padding: "96px 64px" }}>
+          <Reveal>
+            <div style={s.eyebrow}>Who We Are</div>
+            <h2 style={{ fontSize: "clamp(26px,3.2vw,40px)", fontWeight: 300, lineHeight: 1.1, letterSpacing: "-0.02em", marginBottom: 24 }}>
+              Academic rigor.<br /><em style={{ fontStyle: "italic", color: ROSE }}>Operator insight.</em>
+            </h2>
+            <p style={{ fontFamily: "sans-serif", fontSize: 15, color: SOFT, lineHeight: 1.75, marginBottom: 16 }}>
+              Dr. Mahala Geronasso holds a PhD in Hospitality Finance from UCF and has spent over a decade working in hospitality across Brazil, Switzerland, France, the US, and the UAE. She is co-author of <em>Financial Management for the Hospitality Industry</em> (Kendall Hunt) and publishes research in leading journals including Cornell Hospitality Quarterly and Tourism Economics.
+            </p>
+            <p style={{ fontFamily: "sans-serif", fontSize: 15, color: SOFT, lineHeight: 1.75, marginBottom: 24 }}>
+              MahGui Consulting brings that same analytical depth to entrepreneurs building real businesses — not academic exercises.
+            </p>
+            <div style={{ marginTop: 8 }}>
+              <img
+                src="https://d2xsxph8kpxj0f.cloudfront.net/310419663029168482/M83iGP6sVHFT6vazqWgrVe/Mahala-Perfil_897f720e.png"
+                alt="Dr. Mahala Geronasso"
+                style={{ width: 96, height: 96, borderRadius: "50%", objectFit: "cover", border: `3px solid ${ROSE}` }}
+              />
+              <div style={{ marginTop: 12, fontFamily: "sans-serif", fontSize: 14, fontWeight: 600, color: INK }}>Dr. Mahala Geronasso</div>
+              <div style={{ fontFamily: "sans-serif", fontSize: 12, color: ROSE }}>Ph.D. · MBA · CHIA · Les Roches Abu Dhabi</div>
+            </div>
+          </Reveal>
+        </div>
+        {/* right */}
+        <div style={{ background: NAVY, padding: "96px 64px", position: "relative", overflow: "hidden" }}>
+          <div style={{ position: "absolute", top: "-50%", right: "-30%", width: 400, height: 400, borderRadius: "50%", background: `radial-gradient(circle,${ROSE}20 0%,transparent 70%)` }} />
+          <div style={{ position: "relative", zIndex: 1 }}>
+            {credentials.map((c, i) => (
+              <Reveal key={i} delay={i * 0.1}>
+                <div style={{ display: "flex", alignItems: "flex-start", gap: 18, padding: "22px 0", borderBottom: i < credentials.length - 1 ? "1px solid rgba(255,255,255,0.08)" : "none" }}>
+                  <div style={{ width: 40, height: 40, background: `${ROSE}20`, border: `1px solid ${ROSE}50`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, flexShrink: 0, borderRadius: 6 }}>{c.icon}</div>
+                  <div>
+                    <div style={{ fontSize: 15, fontWeight: 400, color: "#fff", marginBottom: 4 }}>{c.title}</div>
+                    <div style={{ fontFamily: "sans-serif", fontSize: 13, color: "rgba(255,255,255,0.5)", lineHeight: 1.5 }}>{c.desc}</div>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── PRICING ── */}
+      <section style={{ background: INK, padding: "96px 64px" }}>
+        <div style={{ maxWidth: 1140, margin: "0 auto" }}>
+          <Reveal>
+            <div style={s.eyebrow}>Pricing</div>
+            <h2 style={{ fontSize: "clamp(28px,3.8vw,44px)", fontWeight: 300, lineHeight: 1.1, letterSpacing: "-0.02em", marginBottom: 16, color: "#fff" }}>
+              Transparent rates.<br /><em style={{ fontStyle: "italic", color: ROSE }}>No surprises.</em>
+            </h2>
+            <p style={{ fontFamily: "sans-serif", fontSize: 16, color: "rgba(255,255,255,0.6)", marginBottom: 56 }}>
+              All engagements include a free 30-minute discovery call before any commitment.
+            </p>
+          </Reveal>
+          <div className="c-pricing-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 20 }}>
+            {[
+              { title: "Business Plan", price: "$800–$1,500", note: "per project · 5–7 days", featured: false, items: ["12-month ramp-up projection","3 financial scenarios","ROI & payback analysis","Bilingual (EN/PT)"], msg: "Hi Mahala! I'm interested in the Business Plan service. Can you tell me more?" },
+              { title: "Complete Package", price: "$1,000–$1,800", note: "per project · ~20% savings", featured: true, tag: "⭐ Best Value", items: ["Everything in Business Plan","Full P&L audit & benchmarks","Hidden cost identification","KPI dashboard recommendation","1 revision round included"], msg: "Hi Mahala! I'm interested in the Complete Package (Business Plan + P&L Review)." },
+              { title: "P&L Review", price: "$300–$500", note: "per project · 3–5 days", featured: false, items: ["COGS & labor benchmarking","Fixed cost mapping","Corrected projections","Written recommendations"], msg: "Hi Mahala! I'm interested in the P&L Review service." },
+            ].map((card, i) => (
+              <Reveal key={i} delay={i * 0.1}>
+                <div style={{ background: card.featured ? ROSE : "rgba(255,255,255,0.05)", border: `1px solid ${card.featured ? ROSE : "rgba(255,255,255,0.1)"}`, borderRadius: 16, padding: "36px 28px", position: "relative" }}>
+                  {card.tag && <div style={{ position: "absolute", top: -12, left: "50%", transform: "translateX(-50%)", background: NAVY, color: "#fff", fontFamily: "sans-serif", fontSize: 10, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", padding: "4px 14px", borderRadius: 999, whiteSpace: "nowrap" }}>{card.tag}</div>}
+                  <div style={{ fontFamily: "Georgia,serif", fontSize: 18, fontWeight: 500, color: card.featured ? INK : "#fff", marginBottom: 8 }}>{card.title}</div>
+                  <div style={{ fontFamily: "Georgia,serif", fontSize: 36, fontWeight: 600, color: card.featured ? INK : ROSE, lineHeight: 1, marginBottom: 4 }}>{card.price}</div>
+                  <div style={{ fontFamily: "sans-serif", fontSize: 12, color: card.featured ? `${INK}99` : "rgba(255,255,255,0.45)", marginBottom: 24 }}>{card.note}</div>
+                  <ul style={{ listStyle: "none", marginBottom: 28 }}>
+                    {card.items.map((item, j) => (
+                      <li key={j} style={{ fontFamily: "sans-serif", fontSize: 13, color: card.featured ? INK : "rgba(255,255,255,0.75)", paddingLeft: 18, position: "relative", marginBottom: 8 }}>
+                        <span style={{ position: "absolute", left: 0, color: card.featured ? INK : ROSE, fontWeight: 700, fontSize: 11 }}>✓</span>{item}
+                      </li>
+                    ))}
+                  </ul>
+                  <a href={waLink(card.msg)} target="_blank" rel="noopener noreferrer" style={{ display: "block", textAlign: "center", padding: "13px 20px", borderRadius: 999, fontFamily: "sans-serif", fontSize: 14, fontWeight: 500, textDecoration: "none", background: card.featured ? INK : "rgba(255,255,255,0.1)", color: "#fff", border: `1px solid ${card.featured ? INK : "rgba(255,255,255,0.25)"}`, transition: "all 0.2s" }}>
+                    Get started →
+                  </a>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal delay={0.3}>
+            <p style={{ textAlign: "center", marginTop: 36, fontFamily: "sans-serif", fontSize: 14, color: "rgba(255,255,255,0.45)" }}>
+              Revenue management, leadership & career coaching are scoped individually.{" "}
+              <a href={waLink("Hi Mahala! I'd like a custom quote for consulting services.")} target="_blank" rel="noopener noreferrer" style={{ color: ROSE, textDecoration: "none" }}>Contact me for a custom quote.</a>
+            </p>
+          </Reveal>
         </div>
       </section>
 
       {/* ── CONTACT ── */}
-      <section className="contact-section" id="contact">
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <FadeIn>
-            <div className="section-label">Get Started</div>
-            <h2 className="section-title">Let's look at<br /><em>your numbers.</em></h2>
-          </FadeIn>
-          <div className="contact-grid">
-            <FadeIn delay={0.1}>
+      <section id="contact" style={{ background: CARD, padding: "96px 64px" }}>
+        <div style={{ maxWidth: 1140, margin: "0 auto" }}>
+          <Reveal>
+            <div style={s.eyebrow}>Get Started</div>
+            <h2 style={{ fontSize: "clamp(28px,3.8vw,44px)", fontWeight: 300, lineHeight: 1.1, letterSpacing: "-0.02em", marginBottom: 56 }}>
+              Let's look at<br /><em style={{ fontStyle: "italic", color: ROSE }}>your numbers.</em>
+            </h2>
+          </Reveal>
+          <div className="c-contact-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 80, alignItems: "start" }}>
+            <Reveal delay={0.1}>
               <div>
-                <h3 className="contact-info-title">Book a free 30-minute discovery call.</h3>
-                <p className="contact-info-body">
+                <h3 style={{ fontSize: 26, fontWeight: 300, marginBottom: 16 }}>Book a free 30-minute discovery call.</h3>
+                <p style={{ fontFamily: "sans-serif", fontSize: 15, color: SOFT, lineHeight: 1.75, marginBottom: 36 }}>
                   Tell us about your concept and what you have so far. We'll tell you exactly where the gaps are and what it would take to get you investor-ready. No commitment required.
                 </p>
-                <div className="contact-detail">
-                  <div className="contact-detail-icon">📍</div>
-                  Serving clients globally — UAE, USA, Brazil & beyond
-                </div>
-                <div className="contact-detail">
-                  <div className="contact-detail-icon">🌐</div>
-                  English · Portuguese · Spanish · French
-                </div>
-                <div className="contact-detail">
-                  <div className="contact-detail-icon">⏱</div>
-                  Typical turnaround: 5–10 business days
-                </div>
+                {[
+                  { icon: "📍", text: "Serving clients globally — UAE, USA, Brazil & beyond" },
+                  { icon: "🌐", text: "English · Portuguese · Spanish · French" },
+                  { icon: "⏱",  text: "Typical turnaround: 5–10 business days" },
+                  { icon: "💬", text: "WhatsApp available for all time zones" },
+                ].map((d, i) => (
+                  <div key={i} style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 14, fontFamily: "sans-serif", fontSize: 14, color: "#444" }}>
+                    <div style={{ width: 36, height: 36, background: WARM, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, borderRadius: 8, flexShrink: 0 }}>{d.icon}</div>
+                    {d.text}
+                  </div>
+                ))}
               </div>
-            </FadeIn>
-            <FadeIn delay={0.2}>
+            </Reveal>
+            <Reveal delay={0.2}>
               {submitted ? (
-                <div className="success-message">
-                  <span className="success-icon">🍱</span>
-                  <h3 className="success-title">Message received!</h3>
-                  <p className="success-body">We'll be in touch within 24 hours to schedule your discovery call. Looking forward to diving into your numbers.</p>
+                <div style={{ textAlign: "center", padding: "48px 32px", background: WARM, borderRadius: 12 }}>
+                  <span style={{ fontSize: 48, marginBottom: 16, display: "block" }}>🍱</span>
+                  <h3 style={{ fontSize: 26, fontWeight: 300, marginBottom: 12 }}>Message received!</h3>
+                  <p style={{ fontFamily: "sans-serif", fontSize: 15, color: SOFT, lineHeight: 1.7 }}>We'll be in touch within 24 hours to schedule your discovery call.</p>
                 </div>
               ) : (
                 <div>
-                  <div className="form-field">
-                    <label className="form-label">Your Name</label>
-                    <input
-                      className="form-input"
-                      placeholder="Felipe Rodrigues"
-                      value={formData.name}
-                      onChange={e => setFormData({ ...formData, name: e.target.value })}
-                    />
-                  </div>
-                  <div className="form-field">
-                    <label className="form-label">Email Address</label>
-                    <input
-                      className="form-input"
-                      type="email"
-                      placeholder="felipe@gostosabakery.com"
-                      value={formData.email}
-                      onChange={e => setFormData({ ...formData, email: e.target.value })}
-                    />
-                  </div>
-                  <div className="form-field">
-                    <label className="form-label">Your Concept</label>
-                    <input
-                      className="form-input"
-                      placeholder="e.g. AYCE sushi restaurant, Orlando FL"
-                      value={formData.concept}
-                      onChange={e => setFormData({ ...formData, concept: e.target.value })}
-                    />
-                  </div>
-                  <div className="form-field">
-                    <label className="form-label">What do you need help with?</label>
+                  {[
+                    { label: "Your Name", key: "name", type: "text", placeholder: "Felipe Rodrigues" },
+                    { label: "Email Address", key: "email", type: "email", placeholder: "felipe@gostosabakery.com" },
+                    { label: "Your Concept", key: "concept", type: "text", placeholder: "e.g. AYCE sushi restaurant, Orlando FL" },
+                  ].map((field) => (
+                    <div key={field.key} style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 18 }}>
+                      <label style={{ fontFamily: "sans-serif", fontSize: 11, fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", color: MUTED }}>{field.label}</label>
+                      <input
+                        type={field.type}
+                        placeholder={field.placeholder}
+                        value={(formData as any)[field.key]}
+                        onChange={e => setFormData({ ...formData, [field.key]: e.target.value })}
+                        style={{ fontFamily: "sans-serif", fontSize: 14, color: INK, background: WARM, border: "1px solid transparent", padding: "14px 16px", outline: "none", width: "100%", borderRadius: 2 }}
+                      />
+                    </div>
+                  ))}
+                  <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 18 }}>
+                    <label style={{ fontFamily: "sans-serif", fontSize: 11, fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", color: MUTED }}>What do you need help with?</label>
                     <textarea
-                      className="form-input"
                       rows={4}
                       placeholder="Tell us where you are and what you're trying to accomplish..."
                       value={formData.message}
                       onChange={e => setFormData({ ...formData, message: e.target.value })}
+                      style={{ fontFamily: "sans-serif", fontSize: 14, color: INK, background: WARM, border: "1px solid transparent", padding: "14px 16px", outline: "none", width: "100%", resize: "none", borderRadius: 2 }}
                     />
                   </div>
-                  <button className="form-submit" onClick={handleSubmit}>
+                  <button
+                    onClick={handleSubmit}
+                    style={{ width: "100%", background: INK, color: "#fff", fontFamily: "sans-serif", fontSize: 13, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", padding: 18, border: "none", cursor: "pointer", borderRadius: 2, marginTop: 8 }}
+                  >
                     Request Discovery Call →
                   </button>
                 </div>
               )}
-            </FadeIn>
+            </Reveal>
           </div>
         </div>
       </section>
-    </div>
-  );
-}
 
-function AnimatedChart() {
-  const [animated, setAnimated] = useState(false);
-  useEffect(() => { setTimeout(() => setAnimated(true), 600); }, []);
-
-  const bars = [
-    { month: "Mo. 1", height: 8, value: "-$4k" },
-    { month: "Mo. 2", height: 18, value: "$7k" },
-    { month: "Mo. 3", height: 30, value: "$18k" },
-    { month: "Mo. 4", height: 46, value: "$34k" },
-    { month: "Mo. 6", height: 62, value: "$61k" },
-    { month: "Mo. 9", height: 78, value: "$93k" },
-    { month: "Mo. 12", height: 100, value: "$126k" },
-  ];
-
-  return (
-    <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "40px" }}>
-      <div style={{ color: "rgba(255,255,255,0.3)", fontFamily: "'DM Sans', sans-serif", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 32 }}>
-        Net Profit — 12-Month Ramp-Up
-      </div>
-      <div style={{ display: "flex", alignItems: "flex-end", gap: 10, height: 160, width: "100%" }}>
-        {bars.map((b, i) => (
-          <div key={i} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <div style={{ position: "relative", width: "100%", display: "flex", alignItems: "flex-end", height: 140 }}>
-              <div
-                className="chart-bar"
-                style={{ height: animated ? `${b.height}%` : "0%", width: "100%" }}
-              >
-                {animated && (
-                  <span className="chart-value">{b.value}</span>
-                )}
-              </div>
-            </div>
-            <div className="chart-label">{b.month}</div>
-          </div>
-        ))}
-      </div>
-      <div style={{ marginTop: 24, fontFamily: "'DM Sans', sans-serif", fontSize: 11, color: "rgba(184,134,11,0.7)", letterSpacing: "0.1em" }}>
-        Base Case · 240 covers/day at Month 12
-      </div>
+      <Footer />
     </div>
   );
 }
