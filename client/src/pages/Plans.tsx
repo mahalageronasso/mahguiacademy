@@ -311,8 +311,8 @@ export default function Plans() {
               <div className="p-8 lg:p-12 border-t lg:border-t-0 lg:border-l" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
                 <div className="grid grid-cols-2 gap-4 h-full content-center">
                   {[
-                    { val: "$800–$1,500", lbl: lang === "pt" ? "Business Plan completo" : "Full Business Plan" },
-                    { val: "$300–$500",   lbl: "P&L Review" },
+                    { val: "From $800", lbl: lang === "pt" ? "Business Plan completo" : "Full Business Plan" },
+                    { val: "From $300",  lbl: "P&L Review" },
                     { val: "5–10",        lbl: lang === "pt" ? "dias de entrega" : "day delivery" },
                     { val: "EN + PT",     lbl: lang === "pt" ? "documentos bilíngues" : "bilingual documents" },
                   ].map((m, i) => (
