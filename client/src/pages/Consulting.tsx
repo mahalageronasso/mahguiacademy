@@ -27,7 +27,7 @@ const services = [
     icon: "📊",
     title: "Business Plan Development",
     subtitle: "Investor-Ready from Day One",
-    price: "$800 – $1,500",
+    price: "From $800",
     tag: "Most Requested",
     tagColor: GOLD,
     description:
@@ -47,7 +47,7 @@ const services = [
     icon: "🔍",
     title: "P&L Review & Cost Analysis",
     subtitle: "Know Where Your Money Really Goes",
-    price: "$300 – $500",
+    price: "From $300",
     tag: "High Impact",
     tagColor: NAVY,
     description:
@@ -66,7 +66,7 @@ const services = [
     icon: "📦",
     title: "Complete Package",
     subtitle: "Everything Before Opening Day",
-    price: "$1,000 – $1,800",
+    price: "From $1,000",
     tag: "Best Value",
     tagColor: ROSE,
     description:
